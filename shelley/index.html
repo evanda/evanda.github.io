@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shelley R******** — classified. Status: unconfirmed. Sightings: disputed.">
+  <title>Shelley R******** · Field Report SR-001</title>
+
+  <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --void:       #080c08;
+      --deep:       #0f170f;
+      --murk:       #182018;
+      --canopy:     #243024;
+      --mist:       #3a5a3a;
+      --fog:        #6a8a6a;
+      --pale:       #c8d8c0;
+      --ghost:      #e8ece0;
+      --evidence:   #d4b830;
+      --redact-bg:  #0a0a08;
+      --stamp:      #8b1a1a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 16px;
+      line-height: 1.75;
+      background: var(--void);
+      color: var(--pale);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: 0.02em;
+    }
+
+    a { color: var(--evidence); text-decoration: none; }
+    a:hover { color: var(--ghost); }
+
+    .redact {
+      background: var(--redact-bg);
+      color: var(--redact-bg);
+      user-select: none;
+      border-radius: 1px;
+      padding: 0 3px;
+    }
+
+    .stamp-text {
+      display: inline-block;
+      border: 2px solid var(--stamp);
+      color: var(--stamp);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      transform: rotate(-4deg);
+      opacity: 0.85;
+    }
+
+    /* ─── NAV ─── */
+    .top-nav {
+      background: var(--deep);
+      border-bottom: 1px solid rgba(106,138,106,0.28);
+      padding: 13px 28px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.7);
+    }
+    .nav-brand {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--fog);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: color 0.2s;
+    }
+    .nav-brand:hover { color: var(--pale); }
+    .nav-center {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: rgba(200,216,192,0.38);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .nav-right { display: flex; justify-content: flex-end; }
+    .nav-file {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--evidence);
+      border: 1px solid rgba(212,184,48,0.35);
+      padding: 4px 12px;
+      border-radius: 1px;
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) { .nav-center { display: none; } }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(170deg, var(--void) 0%, var(--deep) 45%, var(--murk) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        168deg,
+        transparent 0px, transparent 5px,
+        rgba(106,138,106,0.022) 5px, rgba(106,138,106,0.022) 6px
+      );
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,90,58,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--evidence);
+      opacity: 0.78;
+      margin: 0 0 22px;
+      position: relative;
+    }
+    .hero-portrait {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid rgba(106,138,106,0.38);
+      box-shadow: 0 0 60px rgba(58,90,58,0.28), 0 0 120px rgba(0,0,0,0.5);
+      background: var(--deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-portrait .fa {
+      font-size: 5.8rem;
+      color: var(--fog);
+      opacity: 0.85;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 9vw, 6.5rem);
+      font-weight: 700;
+      color: var(--ghost);
+      margin: 0 0 4px;
+      line-height: 1.0;
+      position: relative;
+      text-shadow: 0 4px 60px rgba(58,90,58,0.38);
+    }
+    .hero-divider {
+      width: 58px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--mist), transparent);
+      margin: 18px auto 22px;
+      position: relative;
+    }
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.0rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: var(--pale);
+      margin: 0 0 32px;
+      max-width: 580px;
+      position: relative;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 0 0 38px;
+      position: relative;
+    }
+    .hero-tag {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid rgba(106,138,106,0.32);
+      color: var(--fog);
+      background: rgba(8,12,8,0.55);
+      border-radius: 1px;
+    }
+    .hero-tag.ev {
+      border-color: rgba(212,184,48,0.38);
+      color: var(--evidence);
+    }
+    .hero-blurb {
+      max-width: 500px;
+      font-size: 0.92rem;
+      color: rgba(200,216,192,0.62);
+      line-height: 1.85;
+      position: relative;
+      font-style: italic;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Special Elite', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fog);
+      opacity: 0.38;
+      animation: hero-bob 2.8s ease-in-out infinite;
+      white-space: nowrap;
+    }
+    @keyframes hero-bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─── SECTION WRAPPERS ─── */
+    .sw-void { background: var(--void); }
+    .sw-deep { background: var(--deep); }
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+    }
+
+    .sec-head { text-align: center; margin-bottom: 44px; }
+    .sec-eyebrow {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--evidence);
+      margin: 0 0 8px;
+      opacity: 0.82;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--ghost);
+      margin: 0 0 14px;
+      line-height: 1.15;
+    }
+    .sec-rule {
+      width: 42px;
+      height: 1px;
+      background: var(--mist);
+      margin: 0 auto 16px;
+      opacity: 0.38;
+    }
+    .sec-blurb {
+      max-width: 520px;
+      margin: 0 auto;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: rgba(200,216,192,0.6);
+      text-align: center;
+      line-height: 1.88;
+    }
+
+    /* ─── EVIDENCE GALLERY ─── */
+    .masonry {
+      column-count: 3;
+      column-gap: 10px;
+      margin-top: 36px;
+    }
+    @media (max-width: 820px) { .masonry { column-count: 2; } }
+    @media (max-width: 480px) { .masonry { column-count: 1; } }
+
+    .gitem {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+      border-radius: 2px;
+      border: 1px solid rgba(58,90,58,0.22);
+    }
+    .gitem img {
+      width: 100%;
+      display: block;
+      filter: blur(1.8px) grayscale(0.28) contrast(1.1) brightness(0.8);
+      transition: filter 0.4s ease;
+    }
+    .gitem:hover img {
+      filter: blur(2.4px) grayscale(0.18) contrast(1.15) brightness(0.88);
+    }
+    /* grain overlay */
+    .gitem::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: 0.13;
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+    .gcap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(8,12,8,0.94) 55%);
+      padding: 44px 12px 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+    .gitem:hover .gcap { opacity: 1; }
+    .gcap span {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.78rem;
+      color: var(--pale);
+      display: block;
+      line-height: 1.45;
+    }
+    .ev-label {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      color: var(--evidence);
+      display: block;
+      margin-bottom: 3px;
+      opacity: 0.78;
+    }
+
+    /* ─── QUOTE ─── */
+    .quote-wrap {
+      text-align: center;
+      padding: 64px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .big-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 3vw, 1.9rem);
+      font-weight: 400;
+      color: rgba(200,216,192,0.75);
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+    .big-quote-attr {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--evidence);
+      opacity: 0.7;
+    }
+
+    /* ─── FIELD REPORT ─── */
+    .field-report {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(12,18,12,0.9);
+      border: 1px solid rgba(106,138,106,0.18);
+      border-top: 3px solid rgba(139,26,26,0.48);
+      padding: 44px 48px 40px;
+      position: relative;
+    }
+    @media (max-width: 640px) { .field-report { padding: 28px 22px 24px; } }
+    .fr-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(106,138,106,0.18);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .fr-meta {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: rgba(200,216,192,0.48);
+      line-height: 1.9;
+    }
+    .fr-meta strong { color: rgba(200,216,192,0.72); }
+    .field-report h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.08rem;
+      color: var(--ghost);
+      margin: 28px 0 10px;
+    }
+    .field-report p {
+      font-size: 0.88rem;
+      color: rgba(200,216,192,0.62);
+      line-height: 1.92;
+      margin: 0 0 14px;
+    }
+    .fr-footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(106,138,106,0.18);
+      font-size: 0.76rem !important;
+      color: rgba(200,216,192,0.36) !important;
+    }
+
+    /* ─── CARDS ─── */
+    .cards {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 44px;
+    }
+    .card {
+      flex: 1;
+      min-width: 195px;
+      max-width: 270px;
+      background: rgba(20,30,20,0.7);
+      border: 1px solid rgba(106,138,106,0.2);
+      border-radius: 2px;
+      padding: 26px 22px 22px;
+      text-align: center;
+    }
+    .card-icon {
+      font-size: 1.4rem;
+      color: var(--evidence);
+      margin-bottom: 12px;
+      display: block;
+      opacity: 0.85;
+    }
+    .card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.0rem;
+      margin: 0 0 10px;
+      color: var(--ghost);
+    }
+    .card p {
+      font-size: 0.82rem;
+      color: rgba(200,216,192,0.6);
+      margin: 0;
+      font-style: italic;
+      line-height: 1.78;
+    }
+
+    /* ─── ACCESS DENIED OVERLAY ─── */
+    #classified {
+      position: fixed;
+      inset: 0;
+      background: rgba(8,12,8,0.97);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    #classified.open { opacity: 1; pointer-events: all; }
+    .cl-inner {
+      max-width: 460px;
+      text-align: center;
+      border: 2px solid var(--stamp);
+      padding: 44px 38px 34px;
+    }
+    .cl-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: var(--stamp);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+      display: block;
+      transform: rotate(-3deg);
+      opacity: 0.88;
+    }
+    .cl-msg {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.84rem;
+      color: rgba(200,216,192,0.65);
+      line-height: 1.88;
+      margin: 0 0 26px;
+    }
+    .cl-close {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--evidence);
+      border: 1px solid rgba(212,184,48,0.38);
+      background: transparent;
+      padding: 8px 22px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .cl-close:hover { color: var(--ghost); border-color: var(--ghost); }
+
+    /* ─── SECRET LIGHTBOX ─── */
+    #slb {
+      position: fixed;
+      inset: 0;
+      background: rgba(8,12,8,0.97);
+      z-index: 9100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #slb.open { opacity: 1; pointer-events: all; }
+    .slb-inner {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+    }
+    #slb img {
+      display: block;
+      max-width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      border: 1px solid rgba(106,138,106,0.3);
+      box-shadow: 0 8px 60px rgba(0,0,0,0.8);
+    }
+    #slb-close {
+      position: absolute;
+      top: -14px; right: -14px;
+      width: 34px; height: 34px;
+      background: var(--murk);
+      border: 1px solid var(--mist);
+      color: var(--pale);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    #slb-close:hover { background: var(--canopy); }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--void);
+      border-top: 1px solid rgba(106,138,106,0.15);
+      padding: 48px 24px 36px;
+      text-align: center;
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: rgba(200,216,192,0.6);
+      margin: 0 0 16px;
+    }
+    .footer-stamp-wrap { margin-bottom: 20px; }
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 0 20px;
+    }
+    .footer-links a {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fog);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--pale); }
+    .footer-disclaimer {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.7rem;
+      color: rgba(200,216,192,0.3);
+      font-style: italic;
+      max-width: 520px;
+      margin: 18px auto 0;
+      line-height: 1.85;
+    }
+
+    /* ─── SCROLL FADE-IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ACCESS DENIED OVERLAY -->
+<div id="classified">
+  <div class="cl-inner">
+    <span class="cl-title">Access Denied</span>
+    <p class="cl-msg">
+      This evidence is currently under review by parties who cannot be named.<br><br>
+      To request access, contact <span class="redact">███████████████</span>.<br><br>
+      Estimated response time: <span class="redact">████</span> business days.<br><br>
+      <em>(Subject has already been notified of your inquiry and has left the building.)</em>
+    </p>
+    <button class="cl-close" onclick="closeClassified()">Understood. Dismiss.</button>
+  </div>
+</div>
+
+<!-- SECRET LIGHTBOX -->
+<div id="slb">
+  <div class="slb-inner">
+    <button id="slb-close" onclick="closeSlb()"><i class="fa fa-times"></i></button>
+    <img src="images/PXL_20250110_004304906.jpg" alt="">
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <i class="fa fa-chevron-left"></i>&nbsp;Remingtons.org
+  </a>
+  <div class="nav-center">FILE SR-001 &middot; CLASSIFICATION: CRYPTID &middot; EYES ONLY</div>
+  <div class="nav-right">
+    <span class="nav-file">Evidence: Inconclusive</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Subject File &middot; SR-001 &middot; Status: Unverified</div>
+  <div class="hero-portrait">
+    <i class="fa fa-user-secret"></i>
+  </div>
+  <h1 class="hero-name">Shelley<br>R********</h1>
+  <div class="hero-divider"></div>
+<div class="hero-tags">
+    <span class="hero-tag ev">Status: Unconfirmed</span>
+    <span class="hero-tag">Seldom Seen</span>
+    <span class="hero-tag">Totally Unresearched</span>
+    <span class="hero-tag ev">Sightings: Disputed</span>
+    <span class="hero-tag">May Not Actually Exist</span>
+  </div>
+  <p class="hero-blurb">Current whereabouts unknown. Last confirmed sighting: inconclusive. Experts remain unable to determine whether subject is particularly reclusive, extremely good at hiding, or simply a shared hallucination sustained by a remarkably consistent family over several decades.</p>
+  <div class="hero-scroll"><i class="fa fa-chevron-down"></i>&nbsp;scroll (if you dare)</div>
+</header>
+
+
+<!-- PHOTOGRAPHIC EVIDENCE -->
+<div class="sw-void">
+  <div class="section fade-in">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Evidence Log &middot; Photography Division</div>
+      <h2 class="sec-title">Photographic Evidence</h2>
+      <div class="sec-rule"></div>
+      <p class="sec-blurb">All images authenticated by our research team. Image quality reflects the evasive nature of the subject, not the skill of our photographers, who are doing their best.</p>
+    </div>
+
+    <div class="masonry">
+
+      <!-- Photo 1: Patterson-Gimlin Bigfoot frame, 1967 -->
+      <div class="gitem" onclick="openClassified()">
+        <img src="images/bigfoot.jpg" alt="Unidentified bipedal subject, Northern California, 1967" loading="lazy">
+        <div class="gcap">
+          <span class="ev-label">EXHIBIT SR-001-A</span>
+          <span>Shelley going to the store, 2019. Subject unusually tall. Hair: inconclusive.</span>
+        </div>
+      </div>
+
+      <!-- Photo 2: Surgeon's Photo, Loch Ness, 1934 -->
+      <div class="gitem" onclick="openClassified()">
+        <img src="images/nessie.jpg" alt="Unidentified aquatic subject, Loch Ness, 1934" loading="lazy">
+        <div class="gcap">
+          <span class="ev-label">EXHIBIT SR-001-B</span>
+          <span>Shelley looking for her keys. Loch Ness, Scotland. Travel undisclosed.</span>
+        </div>
+      </div>
+
+      <!-- Photo 3: Mothman -->
+      <div class="gitem" onclick="openClassified()">
+        <img src="images/mothman.jpg" alt="Subject captured in bronze by eyewitness sculptor" loading="lazy">
+        <div class="gcap">
+          <span class="ev-label">EXHIBIT SR-001-C</span>
+          <span>Shelley arriving at a family function. On time, for once. Somewhat unsettling.</span>
+        </div>
+      </div>
+
+      <!-- Photo 4: NASA "flying saucer", 1961 -->
+      <div class="gitem" onclick="openClassified()">
+        <img src="images/nasa_ufo.jpg" alt="Anomalous emergence event, classified facility, 1961" loading="lazy">
+        <div class="gcap">
+          <span class="ev-label">EXHIBIT SR-001-D</span>
+          <span>Shelley checking her phone. Emissions suggest a lot of notifications.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- QUOTE -->
+<div class="sw-deep">
+  <div class="quote-wrap fade-in">
+    <p class="big-quote">&ldquo;I saw her once, at a Tuesday. She looked directly at me, then at the door, then was simply&hellip; elsewhere. I don&rsquo;t sleep well anymore.&rdquo;</p>
+    <span class="big-quote-attr">&mdash; Family member. Name withheld by request. Also by threat.</span>
+  </div>
+</div>
+
+
+<!-- FIELD REPORT -->
+<div class="sw-void">
+  <div class="section fade-in">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Official Documentation</div>
+      <h2 class="sec-title">Field Report SR-001</h2>
+      <div class="sec-rule"></div>
+    </div>
+
+    <div class="field-report">
+      <div class="fr-header">
+        <div class="fr-meta">
+          <strong>Subject:</strong> R********, Shelley<br>
+          <strong>File No.:</strong> SR-001<br>
+          <strong>Classification:</strong> <span style="color:var(--stamp)">CRYPTID / PROBABLE</span>
+        </div>
+        <div class="fr-meta" style="text-align:right">
+          <strong>Filed by:</strong> <span class="redact">████████████</span><br>
+          <strong>Last updated:</strong> <span class="redact">██████████</span><br>
+          <strong>Status:</strong> Ongoing
+        </div>
+      </div>
+
+      <h3>Background &amp; Origins</h3>
+      <p>Subject&rsquo;s origins remain <span class="redact">entirely unclear</span>. Early accounts suggest she may have been born in <span class="redact">██████████, ██</span>, though no documentation has been located that she has not already located first and removed. Some researchers believe she arrived fully formed, possibly from a wardrobe, possibly from a parallel timeline with better coffee.</p>
+
+      <h3>Known Movements</h3>
+      <p>Subject has been linked to activity in at least <span class="redact">██</span> states, though no sighting has been independently verified to our satisfaction. She reportedly moves exclusively during off-peak hours, pays cash, and has never been photographed looking directly at a camera. Evasion appears instinctive rather than deliberate &mdash; though researchers note this distinction may be academic.</p>
+
+      <h3>Areas of Alleged Expertise</h3>
+      <p>Sources indicate subject may possess skills in the following domains, none of which we have been able to confirm: <span class="redact">████████████</span>, <span class="redact">███████████████████</span>, and <span class="redact">what we have been told to describe only as &ldquo;certain organizational capabilities that should not be underestimated.&rdquo;</span> We are choosing to believe this is ominous.</p>
+
+      <h3>Personality Profile</h3>
+      <p>Subject is described by those willing to speak as &ldquo;private,&rdquo; &ldquo;independent,&rdquo; and &ldquo;probably aware that you&rsquo;re talking about her right now.&rdquo; Attempts at a full personality assessment have been thwarted by subject&rsquo;s tendency to simply not be where expected. Those who know her well describe her as warm, deeply competent, and &ldquo;genuinely not interested in having a webpage about herself.&rdquo; This file exists anyway.</p>
+
+      <h3>Current Status</h3>
+      <p>Subject&rsquo;s precise location is unknown. A representative for the subject declined to comment and also declined to confirm that a representative exists. Researchers note that the coffee in the breakroom was fresher than usual this morning. We believe these facts are related.</p>
+
+      <p class="fr-footer">This report was prepared for the <span class="redact">████████</span> Family Research Division. Accuracy is not guaranteed, implied, or particularly attempted. Subject retains the right to deny the existence of this document and probably will.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- KNOWN FACTS -->
+<div class="sw-deep">
+  <div class="section fade-in">
+    <div class="sec-head">
+      <div class="sec-eyebrow">What We Think We Know</div>
+      <h2 class="sec-title">Known Facts</h2>
+      <div class="sec-rule"></div>
+      <p class="sec-blurb">The following have been determined to be facts to the best of our ability, which is, frankly, limited.</p>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <span class="card-icon"><i class="fa fa-map-marker"></i></span>
+        <h4>Location</h4>
+        <p>Reported in 47 states. Confirmed in none. Satellite imaging has proven inconclusive. Subject may or may not have a preferred seat at a restaurant we cannot name.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon"><i class="fa fa-briefcase"></i></span>
+        <h4>Occupation</h4>
+        <p>Unknown. Several theories have been proposed and subsequently <span class="redact">redacted at subject&rsquo;s implied request</span>. Subject has declined to update her LinkedIn. Researchers consider this suspicious.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon"><i class="fa fa-clock-o"></i></span>
+        <h4>Last Seen</h4>
+        <p>Reports vary. One family member says Tuesday. Another says Thursday. A third refuses to discuss it. Reliability of all three accounts: poor to unreliable.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon"><i class="fa fa-heart"></i></span>
+        <h4>Hobbies</h4>
+        <p><span class="redact">████████████████████████████████████████████████████████████████████████</span>. Also possibly gardening.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-name">Shelley R********</div>
+  <div class="footer-stamp-wrap"><span class="stamp-text">Unverified</span></div>
+  <div class="footer-links">
+    <a href="../index.html"><i class="fa fa-home"></i>&nbsp;Remingtons.org</a>
+    <a href="../evanda/index.html"><i class="fa fa-user"></i>&nbsp;Evanda&rsquo;s Page</a>
+    <a href="../isaiah/index.html"><i class="fa fa-star"></i>&nbsp;Isaiah&rsquo;s Creations</a>
+    <a href="#" onclick="openClassified(); return false;"><i class="fa fa-envelope"></i>&nbsp;Contact Shelley</a>
+  </div>
+  <p class="footer-disclaimer">
+    This page was created without the subject&rsquo;s knowledge, consent, review, or approval. The subject has been notified and has not responded. Researchers interpret this as either dignified silence or the beginning of something. This page is a work of loving fiction by people who think they are funnier than they are. Shelley almost certainly exists.
+  </p>
+</footer>
+
+
+<script>
+  function openClassified() {
+    document.getElementById('classified').classList.add('open');
+  }
+  function closeClassified() {
+    document.getElementById('classified').classList.remove('open');
+  }
+  document.getElementById('classified').addEventListener('click', function(e) {
+    if (e.target === this) closeClassified();
+  });
+
+  function openSlb() {
+    document.getElementById('slb').classList.add('open');
+  }
+  function closeSlb() {
+    document.getElementById('slb').classList.remove('open');
+  }
+  document.getElementById('slb').addEventListener('click', function(e) {
+    if (e.target === this) closeSlb();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (document.getElementById('slb').classList.contains('open')) { closeSlb(); return; }
+      if (document.getElementById('classified').classList.contains('open')) { closeClassified(); return; }
+    }
+  });
+
+  /* scroll fade-in */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  /* ─── ─── ─── */
+  let _buf = '';
+  document.addEventListener('keypress', function(e) {
+    if (e.key && e.key.length === 1) {
+      _buf = (_buf + e.key).slice(-12);
+      if (_buf.endsWith('blackLLL') || _buf.endsWith('BlackLLL')) {
+        _buf = '';
+        openSlb();
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
