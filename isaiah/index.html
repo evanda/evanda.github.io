@@ -366,6 +366,88 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .craft-card-link:hover { color: var(--ember-bright); border-color: var(--ember-bright); }
+    button.craft-card-link { background: none; padding: 0; cursor: pointer; font-family: inherit; }
+
+    /* ── CRAFT PROGRESSION MODAL ── */
+    .cp-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1500;
+      overflow-y: auto;
+      padding: 40px 20px 60px;
+    }
+    .cp-overlay.active { display: block; }
+    .cp-panel {
+      background: var(--forge-dark);
+      border: 1px solid var(--copper);
+      border-radius: 2px;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 36px 44px;
+      position: relative;
+    }
+    .cp-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      color: var(--ash);
+      font-size: 2.2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      padding: 0;
+    }
+    .cp-close:hover { color: var(--gold); }
+    .cp-title {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 1.3rem;
+      margin: 0 0 4px;
+    }
+    .cp-subtitle {
+      color: var(--ash);
+      font-style: italic;
+      font-size: 0.9rem;
+      margin: 0 0 28px;
+    }
+    .cp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .cp-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+      border: 1px solid rgba(184,115,51,0.2);
+      filter: brightness(0.88) saturate(0.85);
+      transition: filter 0.25s, transform 0.25s, border-color 0.25s;
+    }
+    .cp-item:hover img {
+      filter: brightness(0.98) saturate(1);
+      transform: scale(1.02);
+      border-color: var(--copper);
+    }
+    .cp-caption {
+      font-size: 0.78rem;
+      color: var(--ash);
+      font-style: italic;
+      padding: 6px 2px 0;
+      line-height: 1.4;
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .cp-panel { padding: 24px 14px 28px; }
+      .cp-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    }
+    @media (max-width: 360px) {
+      .cp-grid { grid-template-columns: 1fr; }
+    }
 
     /* ── ABOUT ── */
     #about {
@@ -535,6 +617,16 @@
   </style>
 </head>
 <body>
+
+  <!-- ── CRAFT PROGRESSION OVERLAY ── -->
+  <div class="cp-overlay" id="cpOverlay">
+    <div class="cp-panel">
+      <button class="cp-close" id="cpClose" aria-label="Close">&times;</button>
+      <h2 class="cp-title" id="cpTitle"></h2>
+      <p class="cp-subtitle">Tap any photo to enlarge</p>
+      <div class="cp-grid" id="cpGrid"></div>
+    </div>
+  </div>
 
   <!-- ── LIGHTBOX OVERLAY ── -->
   <div class="lb-overlay" id="lbOverlay">
@@ -709,9 +801,9 @@
             Isaiah started with a simple flower in 2024 and worked up to a figurative scene
             of sisters at the beach, with a hand-built wooden frame.
           </p>
-          <a href="https://photos.app.goo.gl/seh45pi6A5BCH7nN8" target="_blank" class="craft-card-link">
-            View photos <i class="fa fa-arrow-right"></i>
-          </a>
+          <button class="craft-card-link" onclick="openCraftModal('stained-glass')">
+            See the journey <i class="fa fa-arrow-right"></i>
+          </button>
         </div>
       </div>
 
@@ -727,9 +819,9 @@
             from a picture frame and a carved obelisk to a spoon, a burl bowl, and a
             delicate jewelry tree.
           </p>
-          <a href="https://photos.app.goo.gl/seh45pi6A5BCH7nN8" target="_blank" class="craft-card-link">
-            View photos <i class="fa fa-arrow-right"></i>
-          </a>
+          <button class="craft-card-link" onclick="openCraftModal('wood-carving')">
+            See the journey <i class="fa fa-arrow-right"></i>
+          </button>
         </div>
       </div>
 
@@ -745,9 +837,9 @@
             with forged rings led to building a full backyard forge in 2025 — then the
             real work began.
           </p>
-          <a href="https://photos.app.goo.gl/seh45pi6A5BCH7nN8" target="_blank" class="craft-card-link">
-            View photos <i class="fa fa-arrow-right"></i>
-          </a>
+          <button class="craft-card-link" onclick="openCraftModal('blacksmithing')">
+            See the journey <i class="fa fa-arrow-right"></i>
+          </button>
         </div>
       </div>
 
@@ -763,9 +855,9 @@
             an edge sharp enough to shave with. Isaiah has made a growing collection of knives
             including a bowie and a curved kukri.
           </p>
-          <a href="https://photos.app.goo.gl/seh45pi6A5BCH7nN8" target="_blank" class="craft-card-link">
-            View photos <i class="fa fa-arrow-right"></i>
-          </a>
+          <button class="craft-card-link" onclick="openCraftModal('knifemaking')">
+            See the journey <i class="fa fa-arrow-right"></i>
+          </button>
         </div>
       </div>
 
@@ -781,9 +873,9 @@
             wood grip, and polished double-edged blade — completed in January 2026 and
             unveiled by firelight.
           </p>
-          <a href="https://photos.app.goo.gl/seh45pi6A5BCH7nN8" target="_blank" class="craft-card-link">
-            View photos <i class="fa fa-arrow-right"></i>
-          </a>
+          <button class="craft-card-link" onclick="openCraftModal('swordsmithing')">
+            See the journey <i class="fa fa-arrow-right"></i>
+          </button>
         </div>
       </div>
 
@@ -799,9 +891,9 @@
             reveal a flowing pattern within. Isaiah tackled this ancient technique in 2026 —
             the result speaks for itself.
           </p>
-          <a href="https://photos.app.goo.gl/seh45pi6A5BCH7nN8" target="_blank" class="craft-card-link">
-            View photos <i class="fa fa-arrow-right"></i>
-          </a>
+          <button class="craft-card-link" onclick="openCraftModal('damascus')">
+            See the journey <i class="fa fa-arrow-right"></i>
+          </button>
         </div>
       </div>
 
@@ -1042,6 +1134,129 @@
       track.parentElement.addEventListener('touchend', function(e){
         var dx = e.changedTouches[0].clientX - touchStart;
         if (Math.abs(dx) > 40) { dx < 0 ? goTo(current + 1) : goTo(current - 1); }
+      });
+    })();
+
+    // ── Craft progression modal ──
+    (function () {
+      var crafts = {
+        'stained-glass': {
+          title: 'Stained Glass — The Progression',
+          images: [
+            { src: 'images/PXL_20240211_030854190.jpg',           cap: 'Cutting glass on the mat — the first pieces, early 2024' },
+            { src: 'images/PXL_20240213_224247362.jpg',           cap: 'First panel complete: a red flower in lead came' },
+            { src: 'images/abb4af50-7ac1-4dd6-87dc-1ffed71d8403.jpg', cap: 'Glass pieces cut and laid out for the Sisters at the Beach panel' },
+            { src: 'images/PXL_20241008_224321860.jpg',           cap: 'Sisters at the Beach — soldered and complete' },
+            { src: 'images/IMG_20241018_225407.jpg',              cap: 'The panel backlit in a window' },
+            { src: 'images/IMG_20250706_122718.jpg',              cap: 'Sisters at the Beach in its hand-built wooden frame' },
+          ]
+        },
+        'wood-carving': {
+          title: 'Wood Carving — The Progression',
+          images: [
+            { src: 'images/PXL_20241221_192323145.jpg',           cap: 'First project: a hand-cut wooden picture frame' },
+            { src: 'images/PXL_20241228_204033198.jpg',           cap: 'Workshop bench — obelisk taking shape beside the frame' },
+            { src: 'images/PXL_20241228_223517033.jpg',           cap: 'Carved obelisk on a natural wood base, stained and oiled' },
+            { src: 'images/PXL_20250609_204000491.jpg',           cap: 'Hand-carved spoon with a naturally curved handle' },
+            { src: 'images/PXL_20250705_204347865.jpg',           cap: 'Burl wood bowl — hollowed out, live edge intact' },
+            { src: 'images/PXL_20250705_204343730.jpg',           cap: 'Burl bowl, finished and oiled' },
+            { src: 'images/IMG_20250706_205207.jpg',              cap: 'The burl bowl in daily use as a jewelry dish' },
+            { src: 'images/PXL_20251217_144938662.jpg',           cap: 'Jewelry tree taking shape — still rough on the workbench' },
+            { src: 'images/PXL_20251217_194758782.jpg',           cap: 'Jewelry tree — carved, stained, and finished' },
+          ]
+        },
+        'blacksmithing': {
+          title: 'Blacksmithing — The Progression',
+          images: [
+            { src: 'images/PXL_20240316_182254973.jpg',           cap: 'First ironwork: a hand-forged iron disc, early 2024' },
+            { src: 'images/PXL_20240316_203103964.jpg',           cap: 'Forged ring set with a blue stone' },
+            { src: 'images/PXL_20250218_193534846.MP.jpg',        cap: 'Miniature sword being forged from a single nail' },
+            { src: 'images/PXL_20250218_210830426.jpg',           cap: 'The nail sword — complete' },
+            { src: 'images/PXL_20251001_163952693.jpg',           cap: 'Hauling concrete — building the backyard forge, Oct 2025' },
+            { src: 'images/PXL_20251001_200848824.jpg',           cap: 'Pouring the forge floor from scratch' },
+            { src: 'images/PXL_20251002_192202232.MP.jpg',        cap: 'The forge interior, ready to work' },
+            { src: 'images/PXL_20251006_171538698.jpg',           cap: 'Steel at heat — first sessions in the new forge' },
+          ]
+        },
+        'knifemaking': {
+          title: 'Knifemaking — The Progression',
+          images: [
+            { src: 'images/PXL_20250410_223527195.jpg',           cap: 'Steel bar and wood scales: the first knife begins' },
+            { src: 'images/PXL_20250411_133134385.jpg',           cap: 'Blade shaped, handle scales drilled and fitted' },
+            { src: 'images/PXL_20250412_003137418.jpg',           cap: 'First knife — finished' },
+            { src: 'images/PXL_20250421_215607115.jpg',           cap: 'Second knife with a stained wood handle' },
+            { src: 'images/PXL_20250517_235633827.jpg',           cap: 'Long knife with a split-bark handle' },
+            { src: 'images/PXL_20251010_003329269.jpg',           cap: 'Bowie-style knife, ground and fitted in the forge shop' },
+            { src: 'images/PXL_20251011_033637486.jpg',           cap: 'Bowie hunter — polished, pinned, complete' },
+            { src: 'images/PXL_20251021_185312539.jpg',           cap: 'Kukri blade roughed out in the forge' },
+            { src: 'images/IMG_20251024_181452.jpg',              cap: 'Kukri blade and handle scales, ready to assemble' },
+            { src: 'images/PXL_20251101_214404448.jpg',           cap: 'Kukri — forged curve, wood handle, finished' },
+          ]
+        },
+        'swordsmithing': {
+          title: 'Swordsmithing — The Progression',
+          images: [
+            { src: 'images/PXL_20251218_191830518.jpg',           cap: 'Planning the long sword — paper template on the workbench' },
+            { src: 'images/PXL_20251218_183733763.MP.jpg',        cap: 'Rough-forged blade — the sword begins' },
+            { src: 'images/PXL_20251231_151903924.jpg',           cap: 'Comparing rough and refined: the blade takes shape' },
+            { src: 'images/PXL_20260102_181341753.jpg',           cap: 'Blade, crossguard, and grip assembled — nearly done' },
+            { src: 'images/PXL_20260102_204300936.jpg',           cap: 'Crossguard and handle detail: forged curve, raw wood grip' },
+            { src: 'images/PXL_20260102_230728051.jpg',           cap: 'The long sword revealed by firelight — Jan 2026' },
+            { src: 'images/PXL_20260117_215257477.jpg',           cap: 'Grip detail: wood handle, forged crossguard, steel pommel' },
+            { src: 'images/PXL_20260118_220708803.jpg',           cap: 'Isaiah with the completed sword' },
+          ]
+        },
+        'damascus': {
+          title: 'Damascus Steel — The Progression',
+          images: [
+            { src: 'images/PXL_20260502_185629899.jpg',           cap: 'First Damascus knife — layered steel, wood handle' },
+            { src: 'images/PXL_20260509_185345186.jpg',           cap: 'Close-up: forge-welded layers revealed by acid etching' },
+            { src: 'images/PXL_20260530_173653662.jpg',           cap: 'Damascus knife with a bark-edged wood handle' },
+            { src: 'images/PXL_20260601_224430376.jpg',           cap: 'Another Damascus blade — each piece has a unique pattern' },
+          ]
+        },
+      };
+
+      var cpOverlay = document.getElementById('cpOverlay');
+      var cpTitle   = document.getElementById('cpTitle');
+      var cpGrid    = document.getElementById('cpGrid');
+
+      window.openCraftModal = function (key) {
+        var data = crafts[key];
+        if (!data) return;
+        cpTitle.textContent = data.title;
+        cpGrid.innerHTML = '';
+        data.images.forEach(function (item) {
+          var wrap = document.createElement('div');
+          wrap.className = 'cp-item';
+          var img = document.createElement('img');
+          img.src = item.src;
+          img.alt = item.cap;
+          img.loading = 'lazy';
+          img.addEventListener('click', function () {
+            document.getElementById('lbImg').src = item.src;
+            document.getElementById('lbOverlay').classList.add('active');
+          });
+          var cap = document.createElement('p');
+          cap.className = 'cp-caption';
+          cap.textContent = item.cap;
+          wrap.appendChild(img);
+          wrap.appendChild(cap);
+          cpGrid.appendChild(wrap);
+        });
+        cpOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      function closeCp() {
+        cpOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('cpClose').addEventListener('click', closeCp);
+      cpOverlay.addEventListener('click', function (e) { if (e.target === cpOverlay) closeCp(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && cpOverlay.classList.contains('active') && !document.getElementById('lbOverlay').classList.contains('active')) closeCp();
       });
     })();
 
