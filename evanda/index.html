@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Evanda Remington — father, Googler, deacon, maker, beekeeper, trail runner, keeper of chickens.">
+  <title>Evanda Remington</title>
+
+  <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --abyss:        #070d18;
+      --storm-deep:   #0d1925;
+      --storm-dark:   #152233;
+      --storm-mid:    #1e3349;
+      --storm-blue:   #2d5070;
+      --steel:        #4a7e9e;
+      --mist:         #7eb4cc;
+      --sky-pale:     #b0cfde;
+
+      --linen:        #f8f7f4;
+      --linen-warm:   #eeebe3;
+      --linen-mid:    #c4bdb0;
+      --linen-dark:   #8e8880;
+
+      --purple:       #5e3d7a;
+      --purple-mid:   #8a63b0;
+      --purple-pale:  #c4a8e0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      background: var(--storm-deep);
+      color: var(--linen);
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+    }
+
+    a { color: var(--purple-pale); text-decoration: none; }
+    a:hover { color: var(--linen); }
+
+    /* ─── NAV ─── */
+    .top-nav {
+      background: var(--abyss);
+      border-bottom: 1px solid rgba(74,126,158,0.2);
+      padding: 13px 28px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.55);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--linen-mid);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: color 0.2s;
+    }
+    .nav-brand:hover { color: var(--linen); }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--linen-mid);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--mist); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-resume {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple-pale);
+      border: 1px solid rgba(155,126,192,0.45);
+      padding: 5px 15px;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .nav-resume:hover {
+      color: var(--linen);
+      border-color: var(--purple-mid);
+      background: rgba(94,61,122,0.22);
+    }
+    .nav-terminal {
+      text-align: center;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.68rem;
+      color: rgba(248,247,244,0.82);
+      white-space: nowrap;
+    }
+    .nav-terminal code { font-family: inherit; }
+    .nav-resume { justify-self: end; }
+    @media (max-width: 760px) { .nav-terminal { display: none; } }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(175deg, var(--abyss) 0%, var(--storm-dark) 45%, var(--storm-mid) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 72px;
+      text-align: center;
+      overflow: hidden;
+    }
+    /* diagonal rain-line texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          102deg,
+          transparent 0px,
+          transparent 3px,
+          rgba(126,180,204,0.03) 3px,
+          rgba(126,180,204,0.03) 4px
+        );
+      pointer-events: none;
+    }
+    /* purple depth glow, lower left */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -80px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(94,61,122,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--mist);
+      opacity: 0.75;
+      margin: 0 0 22px;
+      position: relative;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      font-weight: 700;
+      color: var(--linen);
+      margin: 0 0 6px;
+      line-height: 1.0;
+      position: relative;
+      text-shadow: 0 4px 50px rgba(45,80,112,0.55), 0 0 100px rgba(94,61,122,0.2);
+      letter-spacing: 0.01em;
+    }
+    .hero-divider {
+      width: 64px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--steel), transparent);
+      margin: 18px auto 22px;
+      position: relative;
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.8vw, 1.65rem);
+      font-weight: 300;
+      color: var(--sky-pale);
+      margin: 0 0 40px;
+      position: relative;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      justify-content: center;
+      margin: 0 0 48px;
+      position: relative;
+    }
+    .hero-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border: 1px solid rgba(74,126,158,0.35);
+      color: var(--mist);
+      background: rgba(13,25,37,0.5);
+      border-radius: 1px;
+    }
+    .hero-tag.purple-tag {
+      border-color: rgba(138,99,176,0.4);
+      color: var(--purple-pale);
+    }
+    .hero-blurb {
+      max-width: 500px;
+      font-style: italic;
+      font-size: 1.0rem;
+      color: var(--linen-mid);
+      line-height: 1.85;
+      position: relative;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mist);
+      opacity: 0.45;
+      animation: hero-bob 2.6s ease-in-out infinite;
+    }
+    .hero-portrait {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 32px;
+      border: 2px solid rgba(74,126,158,0.38);
+      box-shadow: 0 0 50px rgba(45,80,112,0.45), 0 0 100px rgba(94,61,122,0.18);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 15% 42%;
+      filter: brightness(0.95) saturate(0.9);
+    }
+
+    @keyframes hero-bob {
+      0%, 100% { transform: translateX(-50%) translateY(0px); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-terminal {
+      margin-top: 30px;
+      position: relative;
+    }
+    .hero-terminal code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.74rem;
+      color: rgba(126,180,204,0.5);
+      background: rgba(7,13,24,0.55);
+      border: 1px solid rgba(74,126,158,0.18);
+      padding: 6px 16px;
+      border-radius: 3px;
+      display: inline-block;
+      letter-spacing: 0.03em;
+    }
+    .blink {
+      animation: blink-cur 1.1s step-end infinite;
+    }
+    @keyframes blink-cur {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ─── SECTION WRAPPERS ─── */
+    .sw-dark    { background: var(--storm-deep); }
+    .sw-deeper  { background: var(--abyss); }
+    .sw-light   { background: var(--linen); color: var(--storm-dark); }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 76px 24px 60px;
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .sec-head {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    .sec-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+      margin: 0 0 8px;
+    }
+    .sw-light .sec-eyebrow { color: var(--purple); }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--linen);
+      margin: 0 0 16px;
+      line-height: 1.1;
+    }
+    .sw-light .sec-title { color: var(--storm-dark); }
+    .sec-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--steel);
+      margin: 0 auto 18px;
+      opacity: 0.45;
+    }
+    .sw-light .sec-rule { background: var(--storm-blue); opacity: 0.5; }
+    .sec-blurb {
+      max-width: 540px;
+      margin: 0 auto;
+      font-style: italic;
+      font-size: 1.0rem;
+      color: var(--linen-mid);
+      text-align: center;
+      line-height: 1.85;
+    }
+    .sw-light .sec-blurb { color: var(--storm-blue); }
+
+    /* ─── MASONRY GALLERY ─── */
+    .masonry {
+      column-count: 3;
+      column-gap: 10px;
+      margin-top: 36px;
+    }
+    @media (max-width: 820px)  { .masonry { column-count: 2; } }
+    @media (max-width: 500px)  { .masonry { column-count: 1; } }
+
+    .gitem {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 1px;
+    }
+    .gitem img {
+      width: 100%;
+      display: block;
+      transition: transform 0.45s ease, filter 0.4s ease;
+      filter: brightness(0.88) saturate(0.82);
+    }
+    .gitem:hover img {
+      transform: scale(1.04);
+      filter: brightness(1.0) saturate(1.0);
+    }
+    .gcap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(7,13,24,0.90) 52%);
+      padding: 44px 14px 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gitem:hover .gcap { opacity: 1; }
+    .gcap span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--linen-warm);
+      display: block;
+    }
+    /* Light section caption bg */
+    .sw-light .gcap {
+      background: linear-gradient(transparent, rgba(21,34,51,0.85) 52%);
+    }
+
+    /* ─── 2-COL GRID (smaller sections) ─── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 36px;
+    }
+    @media (max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
+    .grid-2 .gitem img {
+      height: 270px;
+      object-fit: cover;
+    }
+
+    /* ─── INFO CARDS ─── */
+    .cards {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 44px;
+    }
+    .card {
+      flex: 1;
+      min-width: 210px;
+      max-width: 300px;
+      background: rgba(30,51,73,0.45);
+      border: 1px solid rgba(74,126,158,0.25);
+      border-radius: 3px;
+      padding: 28px 28px 24px;
+      text-align: center;
+    }
+    .card-icon {
+      font-size: 1.5rem;
+      color: var(--purple-mid);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .card h4 {
+      font-size: 1.1rem;
+      margin: 0 0 10px;
+      color: var(--linen);
+    }
+    .card p {
+      font-size: 0.88rem;
+      color: var(--linen-mid);
+      margin: 0;
+      font-style: italic;
+      line-height: 1.75;
+    }
+    .card a { color: var(--purple-pale); }
+    .card a:hover { color: var(--linen); }
+    /* cards on light background */
+    .sw-light .card {
+      background: rgba(30,51,73,0.08);
+      border-color: rgba(45,80,112,0.25);
+    }
+    .sw-light .card h4 { color: var(--storm-dark); }
+    .sw-light .card p { color: var(--storm-blue); }
+    .sw-light .card a { color: var(--purple); }
+    .sw-light .card a:hover { color: var(--storm-dark); }
+    .sw-light .card-icon { color: var(--purple); }
+
+    /* ─── WORK GALLERY ─── */
+    .work-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 48px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .work-gallery .gitem img { height: 260px; object-fit: cover; }
+    @media (max-width: 500px) { .work-gallery { grid-template-columns: 1fr; } }
+
+    /* ─── LIGHTBOX ─── */
+    #lb {
+      position: fixed;
+      inset: 0;
+      background: rgba(7,13,24,0.96);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #lb.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lb-inner {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+    }
+    .lb-inner img {
+      display: block;
+      max-width: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      border: 1px solid rgba(74,126,158,0.3);
+      box-shadow: 0 8px 60px rgba(0,0,0,0.8);
+    }
+    #lb-cap {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--linen-mid);
+      text-align: center;
+      margin-top: 12px;
+    }
+    #lb-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 34px;
+      height: 34px;
+      background: var(--storm-dark);
+      border: 1px solid var(--steel);
+      color: var(--linen);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    #lb-close:hover { background: var(--storm-blue); }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: var(--abyss);
+      border-top: 1px solid rgba(74,126,158,0.18);
+      padding: 52px 24px 40px;
+      text-align: center;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--linen-warm);
+      margin: 0 0 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 26px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0 0 22px;
+    }
+    .footer-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen-dark);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--purple-pale); }
+    .footer-sub {
+      margin-top: 18px;
+    }
+    .footer-verse {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--linen-dark);
+      opacity: 0.72;
+      margin: 6px 0;
+      padding: 0;
+      border: none;
+    }
+
+    /* ─── CATEGORY GRID ─── */
+    .cat-grid-wrap {
+      background: var(--abyss);
+      padding: 28px 20px 0;
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 230px;
+      gap: 8px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .cat-cell {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.25s;
+    }
+    .cat-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.48) saturate(0.7);
+      transition: filter 0.35s ease, transform 0.4s ease;
+    }
+    .cat-cell:hover img {
+      filter: brightness(0.72) saturate(0.95);
+      transform: scale(1.05);
+    }
+    .cat-cell.active img { filter: brightness(0.65) saturate(0.9); }
+    .cat-cell.active { border-color: var(--steel); }
+    .cat-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .cat-cell.active .cat-overlay { background: rgba(45,80,112,0.15); }
+    .cat-icon {
+      font-size: 1.7rem;
+      color: var(--linen);
+      opacity: 0.82;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.75);
+      transition: transform 0.25s ease;
+    }
+    .cat-cell:hover .cat-icon { transform: scale(1.15); }
+    .cat-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--linen);
+      text-shadow: 0 2px 14px rgba(0,0,0,0.85);
+    }
+    .cat-cell.active .cat-label { color: var(--sky-pale); }
+
+    /* portrait: col 2, rows 1–2 */
+    .cat-portrait {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      overflow: hidden;
+    }
+    .cat-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 20%;
+      display: block;
+      filter: brightness(0.88) saturate(0.88);
+    }
+
+    /* expandable panel */
+    .cat-panel-wrap {
+      background: var(--abyss);
+      padding: 0 20px;
+    }
+    .cat-panel {
+      max-width: 960px;
+      margin: 0 auto;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cat-panel.open {
+      max-height: 6000px;
+    }
+    .cat-content {
+      display: none;
+      padding: 52px 0 72px;
+      border-top: 1px solid rgba(74,126,158,0.2);
+      margin-top: 8px;
+    }
+    .cat-content.active {
+      display: block;
+      animation: panelFadeUp 0.45s ease forwards;
+    }
+    @keyframes panelFadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* panel uses dark bg — override light-section overrides */
+    .cat-content .sec-title   { color: var(--linen); }
+    .cat-content .sec-eyebrow { color: var(--purple-mid); }
+    .cat-content .sec-blurb   { color: var(--linen-mid); }
+    .cat-content .sec-rule    { background: var(--steel); opacity: 0.45; }
+    /* cards inside panel */
+    .cat-content .card        { background: rgba(30,51,73,0.45); border-color: rgba(74,126,158,0.25); }
+    .cat-content .card h4     { color: var(--linen); }
+    .cat-content .card p      { color: var(--linen-mid); }
+    .cat-content .card a      { color: var(--purple-pale); }
+    .cat-content .card-icon   { color: var(--purple-mid); }
+
+    @media (max-width: 640px) {
+      .cat-portrait { display: none; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    }
+
+    /* ─── SCROLL FADE-IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-in.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <div class="lb-inner">
+    <button id="lb-close"><i class="fa fa-times"></i></button>
+    <img id="lb-img" src="" alt="">
+    <div id="lb-cap"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <i class="fa fa-chevron-left"></i> Remingtons.org
+  </a>
+  <div class="nav-terminal"><code>vanity page vibe-coded with claude sonnet 4.6<span class="blink">▌</span></code></div>
+  <a href="https://docs.google.com/document/d/1GAhr1mApd8m_CprgwjV3SSKqwEH_UVifE0VTvzAHfXA/edit?tab=t.0" class="nav-resume" target="_blank">Résumé ↗</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-portrait">
+    <img src="images/IMG_20240624_105752387.jpg" alt="Evanda Remington">
+  </div>
+<h1 class="hero-name">Evanda<br>Remington</h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Father, husband, craftsman, Christian, nerd, and keeper of bees</p>
+  <div class="hero-scroll"><i class="fa fa-chevron-down"></i>&nbsp; scroll</div>
+</header>
+
+
+<!-- ═══════════════════════════════════════
+     CATEGORY GRID
+════════════════════════════════════════ -->
+<section class="cat-grid-wrap fade-in" id="categories">
+  <div class="cat-grid">
+
+    <!-- TL: work -->
+    <div class="cat-cell" data-cat="work">
+      <img src="images/20180223_134115.jpg" alt="Tech &amp; Work" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-laptop cat-icon"></i>
+        <span class="cat-label">Work</span>
+      </div>
+    </div>
+
+    <!-- col 2, rows 1–2: portrait -->
+    <div class="cat-portrait">
+      <img src="images/PXL_20260124_221647825.TS-000.jpg" alt="Evanda Remington">
+    </div>
+
+    <!-- TR: maker -->
+    <div class="cat-cell" data-cat="maker">
+      <img src="images/PXL_20260221_134607523.jpg" alt="Maker" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-wrench cat-icon"></i>
+        <span class="cat-label">Maker</span>
+      </div>
+    </div>
+
+    <!-- ML: fitness -->
+    <div class="cat-cell" data-cat="fitness">
+      <img src="images/20230925_095349-COLLAGE.jpg" alt="Fitness" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-heartbeat cat-icon"></i>
+        <span class="cat-label">Fitness</span>
+      </div>
+    </div>
+
+    <!-- MR: land -->
+    <div class="cat-cell" data-cat="land">
+      <img src="images/PXL_20220927_230055741.jpg" alt="Land &amp; Creatures" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-leaf cat-icon"></i>
+        <span class="cat-label">Land</span>
+      </div>
+    </div>
+
+    <!-- BL: nature -->
+    <div class="cat-cell" data-cat="nature">
+      <img src="images/PXL_20250901_230739264.jpg" alt="Nature" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-tree cat-icon"></i>
+        <span class="cat-label">Nature</span>
+      </div>
+    </div>
+
+    <!-- BC: faith -->
+    <div class="cat-cell" data-cat="faith">
+      <img src="images/PXL_20250920_173048940.jpg" alt="Faith &amp; Service" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-university cat-icon"></i>
+        <span class="cat-label">Faith</span>
+      </div>
+    </div>
+
+    <!-- BR: family -->
+    <div class="cat-cell" data-cat="family">
+      <img src="images/PXL_20231214_232344677.jpg" alt="Family" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-users cat-icon"></i>
+        <span class="cat-label">Family</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     EXPANDABLE PANEL
+════════════════════════════════════════ -->
+<div class="cat-panel-wrap">
+  <div class="cat-panel" id="cat-panel">
+
+    <!-- ── MAKER ── -->
+    <div class="cat-content" data-cat="maker">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Always building something</div>
+        <h2 class="sec-title">The Maker &amp; Builder</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Stained glass, sewing, woodworking, blacksmithing, knitting, glass blowing, electronics, home renovation — if it can be made or fixed, it's worth a try.</p>
+      </div>
+      <div class="masonry">
+        <div class="gitem" data-src="images/B02_F09_023.jpg" data-cap="The origin story — making things since the 80s">
+          <img src="images/B02_F09_023.jpg" alt="Young Evanda as a child working with yarn">
+          <div class="gcap"><span>The origin story</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20260221_134607523.jpg" data-cap="Windsor rocking chair — hand-carved from scratch">
+          <img src="images/PXL_20260221_134607523.jpg" alt="Hand-carved Windsor rocking chair">
+          <div class="gcap"><span>Windsor rocking chair — hand-carved</span></div>
+        </div>
+        <div class="gitem" data-src="images/20230524_173852.jpg" data-cap="Glass blowing with Isaiah">
+          <img src="images/20230524_173852.jpg" alt="Glass blowing in a studio">
+          <div class="gcap"><span>Glass blowing with Isaiah</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20211101_014658991.NIGHT.jpg" data-cap="Stained glass — a horse, a beginning">
+          <img src="images/PXL_20211101_014658991.NIGHT.jpg" alt="Stained glass horse panel">
+          <div class="gcap"><span>Stained glass — a horse, a beginning</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20250719_202617992.jpg" data-cap="Rewiring a vintage Tiffany lamp">
+          <img src="images/PXL_20250719_202617992.jpg" alt="Rewiring a Tiffany lamp">
+          <div class="gcap"><span>Rewiring a vintage Tiffany lamp</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20260206_015832332.jpg" data-cap="Hand-knitted winter beanie">
+          <img src="images/PXL_20260206_015832332.jpg" alt="Wearing a hand-knitted dark beanie">
+          <div class="gcap"><span>Hand-knitted winter beanie</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20260124_221647825.TS-000.jpg" data-cap="Loom knitting — better with company">
+          <img src="images/PXL_20260124_221647825.TS-000.jpg" alt="Loom knitting at kitchen table">
+          <div class="gcap"><span>Loom knitting — better with company</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20230410_225537280.jpg" data-cap="Handmade linen vest">
+          <img src="images/PXL_20230410_225537280.jpg" alt="Wearing handmade green linen vest">
+          <div class="gcap"><span>Handmade linen vest</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_3659.JPG" data-cap="The plush fox that started the sewing habit">
+          <img src="images/IMG_3659.JPG" alt="Sewing a stuffed fox toy">
+          <div class="gcap"><span>The plush fox that started the sewing habit</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_20260102_164743%20(2).jpg" data-cap="Blacksmithing — hot metal, cold resolve">
+          <img src="images/IMG_20260102_164743%20(2).jpg" alt="Blacksmithing at the forge">
+          <div class="gcap"><span>Blacksmithing — hot metal, cold resolve</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20251231_210810151.jpg" data-cap="Chainsaw mill — fallen trees into lumber">
+          <img src="images/PXL_20251231_210810151.jpg" alt="Chainsaw milling">
+          <div class="gcap"><span>Chainsaw mill — fallen trees into lumber</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20220312_185141066.jpg" data-cap="Bathroom gut — before the before">
+          <img src="images/PXL_20220312_185141066.jpg" alt="Gutted bathroom remodel">
+          <div class="gcap"><span>Bathroom gut — before the before</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_20190202_113923705_HDR.jpg" data-cap="Porch restoration — scaffolding season">
+          <img src="images/IMG_20190202_113923705_HDR.jpg" alt="Porch restoration on scaffolding">
+          <div class="gcap"><span>Porch restoration — scaffolding season</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20230506_190955731.jpg" data-cap="Chicken coop — plumb, level, proud">
+          <img src="images/PXL_20230506_190955731.jpg" alt="Framing chicken coop walls">
+          <div class="gcap"><span>Chicken coop — plumb, level, proud</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LAND ── -->
+    <div class="cat-content" data-cat="land">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Homestead life</div>
+        <h2 class="sec-title">Land &amp; Creatures</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Bees, chickens, a John Deere tractor, and a few acres that always need something. The land is a good teacher — patient, honest, and not interested in shortcuts.</p>
+      </div>
+      <div class="masonry">
+        <div class="gitem" data-src="images/IMG_20200403_143904876_HDR.jpg" data-cap="Hive inspection — the bees always know">
+          <img src="images/IMG_20200403_143904876_HDR.jpg" alt="Beekeeper with frame covered in bees">
+          <div class="gcap"><span>Hive inspection — the bees always know</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20220927_230055741.jpg" data-cap="Apiary at golden hour">
+          <img src="images/PXL_20220927_230055741.jpg" alt="Row of bee hives at sunset">
+          <div class="gcap"><span>Apiary at golden hour</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20230506_183456743.jpg" data-cap="Scout swarm — ladder + bee suit + tree">
+          <img src="images/PXL_20230506_183456743.jpg" alt="Beekeeper climbing tall ladder into tree">
+          <div class="gcap"><span>Scout swarm — ladder + bee suit + tree</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_20200414_110518308.jpg" data-cap="Swarm cluster — a polite relocation request">
+          <img src="images/IMG_20200414_110518308.jpg" alt="Bee swarm on tree branch">
+          <div class="gcap"><span>Swarm cluster — a polite relocation request</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20260416_171054245.jpg" data-cap="Spring check — a good winter survived">
+          <img src="images/PXL_20260416_171054245.jpg" alt="Bee hives in spring">
+          <div class="gcap"><span>Spring check — a good winter survived</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20231222_193421769.MP.jpg" data-cap="The flock — they end sleeping in">
+          <img src="images/PXL_20231222_193421769.MP.jpg" alt="Selfie with flock of chickens">
+          <div class="gcap"><span>The flock — they end sleeping in</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20260306_190801480.jpg" data-cap="Free-range spring patrol">
+          <img src="images/PXL_20260306_190801480.jpg" alt="Chickens on spring grass">
+          <div class="gcap"><span>Free-range spring patrol</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_20200403_182500713.jpg" data-cap="The John Deere earns its keep">
+          <img src="images/IMG_20200403_182500713.jpg" alt="On John Deere tractor in woods">
+          <div class="gcap"><span>The John Deere earns its keep</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FAMILY ── -->
+    <div class="cat-content" data-cat="family">
+      <div class="sec-head">
+        <div class="sec-eyebrow">One wife, four boys, all wild</div>
+        <h2 class="sec-title">Family Man</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Husband and father — the best stories happen at home, on bikes, on trails, or crammed on a couch reading the same chapter twice.</p>
+      </div>
+      <div class="masonry">
+        <div class="gitem" data-src="images/PXL_20231214_232344677.jpg" data-cap="Dressed to the nines">
+          <img src="images/PXL_20231214_232344677.jpg" alt="Couple dressed up in matching blue sparkle outfits">
+          <div class="gcap"><span>Dressed to the nines</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_2356.JPG" data-cap="Bike rides started young">
+          <img src="images/IMG_2356.JPG" alt="Biking with young child in rear seat">
+          <div class="gcap"><span>Bike rides started young</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20251210_010537323.jpg" data-cap="My Side of the Mountain — read together">
+          <img src="images/PXL_20251210_010537323.jpg" alt="Reading with son on couch">
+          <div class="gcap"><span><em>My Side of the Mountain</em> — read together</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20260410_181041686.TS-000.jpg" data-cap="Trail riding with the next generation">
+          <img src="images/PXL_20260410_181041686.TS-000.jpg" alt="Mountain biking with son">
+          <div class="gcap"><span>Trail riding with the next generation</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20250312_000831578.MP.jpg" data-cap="Tuesday night energy">
+          <img src="images/PXL_20250312_000831578.MP.jpg" alt="Silly faces with son on couch">
+          <div class="gcap"><span>Tuesday night energy</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FAITH ── -->
+    <div class="cat-content" data-cat="faith">
+      <div class="sec-head">
+        <div class="sec-eyebrow">First &amp; always</div>
+        <h2 class="sec-title">Faith &amp; Service</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Deacon at Midway Presbyterian Church — mercy ministry, service, and the slow work of caring for a congregation. The kind of work that only makes sense over decades.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon"><i class="fa fa-university"></i></span>
+          <h4>Midway PCA</h4>
+          <p>Deacon at <a href="https://midwaypca.org" target="_blank">Midway Presbyterian Church</a>, Powder Springs, GA. Serving the congregation through mercy, hospitality, and practical care for those in need.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon"><i class="fa fa-heart"></i></span>
+          <h4>Philanthropy</h4>
+          <p>Workdays, service projects, and community partnerships — putting hands to work where they're needed. Good people, wheelbarrows, and mulch.</p>
+        </div>
+      </div>
+      <div class="work-gallery" style="margin-top:44px; grid-template-columns:1fr; max-width:560px; margin-left:auto; margin-right:auto;">
+        <div class="gitem" data-src="images/PXL_20250920_173048940.jpg" data-cap="Church workday — good people, wheelbarrows, and mulch">
+          <img src="images/PXL_20250920_173048940.jpg" alt="Five men with shovels at church workday">
+          <div class="gcap"><span>Church workday — good people and mulch</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── NATURE ── -->
+    <div class="cat-content" data-cat="nature">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Wild places</div>
+        <h2 class="sec-title">Nature &amp; Adventure</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Walking beautiful places with my wife and good friends — Switzerland, the Olympic Peninsula, the Smokies, the California coast. The world keeps getting bigger.</p>
+      </div>
+      <div class="masonry">
+        <div class="gitem" data-src="images/PXL_20220903_110459382.jpg" data-cap="Swiss Alps — Grindelwald">
+          <img src="images/PXL_20220903_110459382.jpg" alt="Couple in Swiss Alps">
+          <div class="gcap"><span>Swiss Alps — Grindelwald</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20220905_083339486.jpg" data-cap="Zürich — Fraumünster Church">
+          <img src="images/PXL_20220905_083339486.jpg" alt="Couple in front of Zurich church">
+          <div class="gcap"><span>Zürich — Fraumünster Church</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_20220902_161248810_HDR.jpg" data-cap="Swiss Alps — the long way round">
+          <img src="images/IMG_20220902_161248810_HDR.jpg" alt="Hiking in Swiss Alps solo">
+          <div class="gcap"><span>Swiss Alps — the long way round</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20241022_210117522.jpg" data-cap="Smoky Mountains — peak fall">
+          <img src="images/PXL_20241022_210117522.jpg" alt="Couple hiking Smoky Mountains">
+          <div class="gcap"><span>Smoky Mountains — peak fall</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20241025_143736921.jpg" data-cap="Autumn in the hills">
+          <img src="images/PXL_20241025_143736921.jpg" alt="Couple in fall foliage">
+          <div class="gcap"><span>Autumn in the hills</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20250901_230739264.jpg" data-cap="Olympic Peninsula — above the clouds">
+          <img src="images/PXL_20250901_230739264.jpg" alt="Couple on Olympic Peninsula summit">
+          <div class="gcap"><span>Olympic Peninsula — above the clouds</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20250903_201033624.jpg" data-cap="Marymere Falls, Olympic rainforest">
+          <img src="images/PXL_20250903_201033624.jpg" alt="Couple in front of waterfall">
+          <div class="gcap"><span>Marymere Falls, Olympic rainforest</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20250905_010001946.jpg" data-cap="Hole-in-the-Wall, Pacific coast">
+          <img src="images/PXL_20250905_010001946.jpg" alt="Couple on foggy Pacific coast">
+          <div class="gcap"><span>Hole-in-the-Wall, Pacific coast</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20240805_222414162.jpg" data-cap="Marin Headlands, California">
+          <img src="images/PXL_20240805_222414162.jpg" alt="California coast hiking">
+          <div class="gcap"><span>Marin Headlands, California</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20240626_001304447.jpg" data-cap="Sundown walk — Northern California">
+          <img src="images/PXL_20240626_001304447.jpg" alt="Hiking at sunset in California">
+          <div class="gcap"><span>Sundown walk — Northern California</span></div>
+        </div>
+        <div class="gitem" data-src="images/IMG_20240624_105752387.jpg" data-cap="Because why just walk past a tree">
+          <img src="images/IMG_20240624_105752387.jpg" alt="Horizontal flag hold on tree">
+          <div class="gcap"><span>Because why just walk past a tree</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FITNESS ── -->
+    <div class="cat-content" data-cat="fitness">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Moving through the world</div>
+        <h2 class="sec-title">Fitness</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Running, lifting, mud races. A little suffering under controlled conditions is good for the soul — and the proof is in the finishing-line arms-up.</p>
+      </div>
+      <div class="grid-2">
+        <div class="gitem" data-src="images/20230925_095349-COLLAGE.jpg" data-cap="Rugged Maniac 2023 — mud in places mud should not be">
+          <img src="images/20230925_095349-COLLAGE.jpg" alt="Mud race collage">
+          <div class="gcap"><span>Rugged Maniac 2023</span></div>
+        </div>
+        <div class="gitem" data-src="images/20231030_192912-COLLAGE.jpg" data-cap="October miles — and evidence">
+          <img src="images/20231030_192912-COLLAGE.jpg" alt="Training and running map">
+          <div class="gcap"><span>October miles — and evidence</span></div>
+        </div>
+        <div class="gitem" data-src="images/20250215_140306-COLLAGE.jpg" data-cap="February five-miler — cold enough to count double">
+          <img src="images/20250215_140306-COLLAGE.jpg" alt="Running selfie with Fitbit stats">
+          <div class="gcap"><span>February five-miler</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20240907_232828330.jpg" data-cap="Sunset ridge run">
+          <img src="images/PXL_20240907_232828330.jpg" alt="Trail running selfie at sunset">
+          <div class="gcap"><span>Sunset ridge run</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WORK ── -->
+    <div class="cat-content" data-cat="work">
+      <div class="sec-head">
+        <div class="sec-eyebrow">By day</div>
+        <h2 class="sec-title">Tech &amp; Work</h2>
+        <div class="sec-rule"></div>
+        <p class="sec-blurb">Software engineer at Google in Atlanta since 2001 — infrastructure, developer tools, and emerging platforms. Still genuinely interested after all these years.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon"><i class="fa fa-google"></i></span>
+          <h4>Google</h4>
+          <p>Two-plus decades building at scale. Developer platforms, infrastructure, and the occasional side-conversation about AI that turned into a whole new career chapter.<br><br>
+          <a href="https://www.linkedin.com/in/evanda/" target="_blank">LinkedIn ↗</a></p>
+        </div>
+        <div class="card">
+          <span class="card-icon"><i class="fa fa-code"></i></span>
+          <h4>Personal Projects</h4>
+          <p>Websites and small apps built with curiosity and Claude Code — including the one you're looking at right now. The joy is in the building, not the launching.</p>
+        </div>
+      </div>
+      <div class="work-gallery">
+        <div class="gitem" data-src="images/20180223_134115.jpg" data-cap="DevNexus 2018 — speaking on developer platforms">
+          <img src="images/20180223_134115.jpg" alt="Speaking at DevNexus conference">
+          <div class="gcap"><span>DevNexus 2018 — developer platforms</span></div>
+        </div>
+        <div class="gitem" data-src="images/PXL_20210508_010103578.jpg" data-cap="Google Atlanta — since 2001">
+          <img src="images/PXL_20210508_010103578.jpg" alt="Wearing a Google Atlanta shirt">
+          <div class="gcap"><span>Google Atlanta — since 2001</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cat-panel -->
+</div><!-- /cat-panel-wrap -->
+
+
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-name">Evanda Remington</div>
+  <div class="footer-links">
+    <a href="../index.html"><i class="fa fa-home"></i>&nbsp;Remingtons.org</a>
+    <a href="https://www.linkedin.com/in/evanda/" target="_blank"><i class="fa fa-linkedin"></i>&nbsp;LinkedIn</a>
+    <a href="https://www.instagram.com/evandaremington/" target="_blank"><i class="fa fa-instagram"></i>&nbsp;Instagram</a>
+    <a href="https://midwaypca.org" target="_blank"><i class="fa fa-university"></i>&nbsp;Midway PCA</a>
+    <a href="../isaiah/index.html"><i class="fa fa-star"></i>&nbsp;Isaiah's Creations</a>
+  </div>
+  <div class="footer-sub">
+    <blockquote class="footer-verse">&ldquo;Set your minds on things that are above, not on things that are on earth.&rdquo; &mdash; Colossians 3:2</blockquote>
+    <blockquote class="footer-verse">&ldquo;Aspire to live quietly, and to mind your own affairs, and to work with your hands.&rdquo; &mdash; 1 Thessalonians 4:11</blockquote>
+  </div>
+</footer>
+
+
+<script>
+  /* ── Category grid: expand/collapse panel ── */
+  const panel     = document.getElementById('cat-panel');
+  const panelWrap = panel.parentElement;
+  let   activeCat = null;
+
+  function openCat(catId) {
+    const allCells    = document.querySelectorAll('.cat-cell');
+    const allContents = document.querySelectorAll('.cat-content');
+
+    if (activeCat === catId) {
+      /* close */
+      panel.classList.remove('open');
+      allContents.forEach(c => { c.style.display = 'none'; c.classList.remove('active'); });
+      allCells.forEach(c => c.classList.remove('active'));
+      activeCat = null;
+      return;
+    }
+
+    /* switch or open */
+    allContents.forEach(c => { c.style.display = 'none'; c.classList.remove('active'); });
+    allCells.forEach(c => c.classList.remove('active'));
+
+    const target = document.querySelector(`.cat-content[data-cat="${catId}"]`);
+    const cell   = document.querySelector(`.cat-cell[data-cat="${catId}"]`);
+    if (!target) return;
+
+    target.style.display = 'block';
+    void target.offsetHeight; /* trigger reflow so animation fires on show */
+    target.classList.add('active');
+    if (cell) cell.classList.add('active');
+    panel.classList.add('open');
+    activeCat = catId;
+
+    /* register lightbox clicks for newly-visible items */
+    bindLightbox(target);
+
+    /* scroll panel into view after transition starts */
+    setTimeout(() => {
+      panelWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+
+  document.querySelectorAll('.cat-cell').forEach(cell => {
+    cell.addEventListener('click', () => openCat(cell.dataset.cat));
+  });
+
+  /* intercept nav links that target category sections */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const id = link.getAttribute('href').slice(1);
+    const cats = ['work','maker','land','family','faith','nature','fitness'];
+    if (cats.includes(id)) {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        openCat(id);
+      });
+    }
+  });
+
+  /* ── Lightbox ── */
+  const lb    = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+
+  function bindLightbox(scope) {
+    scope.querySelectorAll('.gitem').forEach(item => {
+      if (item._lbBound) return;
+      item._lbBound = true;
+      item.addEventListener('click', () => {
+        lbImg.src = item.dataset.src || '';
+        lbImg.alt = item.querySelector('img')?.alt || '';
+        lbCap.textContent = item.dataset.cap || '';
+        lb.classList.add('open');
+      });
+    });
+  }
+
+  function closeLb() { lb.classList.remove('open'); lbImg.src = ''; }
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (lb.classList.contains('open')) { closeLb(); return; }
+    }
+  });
+
+  /* ── Scroll fade-in ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
