@@ -233,12 +233,35 @@
     }
     .screenshots-row-2 .screenshot img { height: 260px; }
     .screenshots-row-3 .screenshot img { height: 380px; }
+    .screenshot {
+      cursor: zoom-in;
+    }
     .screenshot figcaption {
       padding: 0.5rem 0.75rem;
       font-size: 0.75rem;
       color: var(--muted);
       text-align: center;
       letter-spacing: 0.04em;
+    }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.6);
     }
 
     /* ── Principles ── */
@@ -446,25 +469,25 @@
     <h2>See it in action</h2>
   </div>
   <div class="screenshots-row screenshots-row-2">
-    <figure class="screenshot">
+    <figure class="screenshot" data-full="images/reader.png">
       <img src="images/thumbs/reader.png" alt="Bible Reader" />
       <figcaption>Bible Reader</figcaption>
     </figure>
-    <figure class="screenshot">
+    <figure class="screenshot" data-full="images/concordance.png">
       <img src="images/thumbs/concordance.png" alt="Concordance" />
       <figcaption>Concordance</figcaption>
     </figure>
   </div>
   <div class="screenshots-row screenshots-row-3">
-    <figure class="screenshot">
+    <figure class="screenshot" data-full="images/atlas.png">
       <img src="images/thumbs/atlas.png" alt="Biblical Atlas" />
       <figcaption>Biblical Atlas</figcaption>
     </figure>
-    <figure class="screenshot">
+    <figure class="screenshot" data-full="images/genealogy.png">
       <img src="images/thumbs/genealogy.png" alt="Genealogy" />
       <figcaption>Genealogy</figcaption>
     </figure>
-    <figure class="screenshot">
+    <figure class="screenshot" data-full="images/reading plan.png">
       <img src="images/thumbs/reading-plan.png" alt="Reading Plans" />
       <figcaption>Reading Plans</figcaption>
     </figure>
@@ -602,5 +625,30 @@
   </div>
 </footer>
 
+<div id="lightbox">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.screenshot[data-full]').forEach(fig => {
+    fig.addEventListener('click', () => {
+      lbImg.src = fig.dataset.full;
+      lbImg.alt = fig.querySelector('figcaption').textContent;
+      lb.classList.add('open');
+    });
+  });
+
+  lb.addEventListener('click', () => {
+    lb.classList.remove('open');
+    lbImg.src = '';
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { lb.classList.remove('open'); lbImg.src = ''; }
+  });
+</script>
 </body>
 </html>
