@@ -332,6 +332,58 @@
       color: var(--muted);
     }
 
+    /* ── Community ── */
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .community-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .community-card .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .community-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .community-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
+    .community-card ol {
+      padding-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .community-card ol li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+      line-height: 1.5;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--ember);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .card-link:hover { color: var(--gold); }
+    .card-link + .card-link { margin-top: 0.5rem; display: flex; }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
@@ -577,7 +629,7 @@
     <div class="source-card">
       <div class="tag">Bible Translations</div>
       <h4>Berean Standard Bible &amp; KJV</h4>
-      <p>31,000+ verses each. BSB is public domain (dedicated 2023); KJV is public domain (1611).</p>
+      <p>The <strong style="color:var(--text)">Berean Standard Bible</strong> is the default translation — a modern, readable English Bible dedicated to the public domain in 2023. Every BSB word is aligned to its Hebrew or Greek Strong's number, so tapping any word shows the original language definition instantly. The <strong style="color:var(--text)">King James Version</strong> (1611) is also included and switchable at any time.</p>
     </div>
     <div class="source-card">
       <div class="tag">Commentary</div>
@@ -608,6 +660,39 @@
       <div class="tag">Hymns</div>
       <h4>70 Classic Hymns</h4>
       <p>Scripture-indexed public-domain hymns (all pre-1928) from Watts, Wesley, Newton, Crosby, Luther, and others.</p>
+    </div>
+  </div>
+</section>
+
+<section id="community">
+  <div class="section-label">Community</div>
+  <h2>Testing &amp; feedback</h2>
+  <p class="section-intro">
+    BUB is in active development. Testers and feedback are welcome.
+  </p>
+
+  <div class="community-grid">
+    <div class="community-card">
+      <span class="card-icon">🧪</span>
+      <h3>Join the beta</h3>
+      <p>BUB is available as a Google Play beta. To install it you need to join the testers group first, then use the Play Store testing link.</p>
+      <ol>
+        <li>Join the <strong style="color:var(--text)">bub-testers</strong> Google Group</li>
+        <li>Then open the Play Store testing link to install</li>
+      </ol>
+      <a class="card-link" href="https://groups.google.com/g/bub-testers/members" target="_blank" rel="noopener">→ Join bub-testers group</a>
+      <a class="card-link" href="https://play.google.com/apps/testing/org.remingtons.evanda.bub" target="_blank" rel="noopener">→ Install via Play Store (testers)</a>
+    </div>
+    <div class="community-card">
+      <span class="card-icon">🐛</span>
+      <h3>Bugs &amp; feature requests</h3>
+      <p>All feedback goes through GitHub Issues on the <strong style="color:var(--text)">bub-feedback</strong> repo. You'll need a free GitHub account.</p>
+      <ol>
+        <li>Search existing issues — add a 👍 if yours is already there</li>
+        <li>Click <strong style="color:var(--text)">New issue</strong> and write a clear title</li>
+        <li>Describe the problem or idea — screenshots encouraged</li>
+      </ol>
+      <a class="card-link" href="https://github.com/evanda/bub-feedback/issues" target="_blank" rel="noopener">→ Open an issue on GitHub</a>
     </div>
   </div>
 </section>
