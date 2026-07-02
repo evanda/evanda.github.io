@@ -38,7 +38,7 @@
       padding: 0 2rem;
     }
     .header-inner {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -144,7 +144,7 @@
     /* ── Section ── */
     section {
       padding: 4rem 2rem;
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
     }
     section + section {
@@ -170,78 +170,74 @@
       margin-bottom: 2.5rem;
     }
 
-    /* ── Feature grid ── */
-    .feature-grid {
+    /* ── Feature showcase (4-up: copy on top, screenshot below) ── */
+    .feature-showcase {
+      display: flex;
+      flex-direction: column;
+    }
+    .feature-row-pair {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+      padding: 2.5rem 0;
     }
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      transition: border-color 0.2s;
+    .feature-row-pair + .feature-row-pair {
+      border-top: 1px solid var(--border);
     }
-    .feature-card:hover { border-color: rgba(201,120,54,0.4); }
-    .feature-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
+    .feature-showcase > .feature-row-pair:first-child {
+      padding-top: 0;
+    }
+    .feature-showcase > .feature-row-pair:last-child {
+      padding-bottom: 0;
+    }
+    .feature-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .feature-cell .feature-icon {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
       display: block;
     }
-    .feature-card h3 {
-      font-size: 0.95rem;
+    .feature-cell .feature-text h3 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.02rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
     }
-    .feature-card p {
-      font-size: 0.875rem;
+    .feature-cell .feature-text p {
+      font-size: 0.81rem;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.5;
     }
-
-    /* ── Screenshots ── */
-    .screenshots-outer {
-      border-top: 1px solid var(--border);
-      padding: 4rem 2rem 3rem;
-      max-width: 900px;
-      margin: 0 auto;
+    .feature-cell .feature-shot {
+      width: 100%;
+      max-width: 230px;
     }
-    .screenshots-header {
-      margin-bottom: 2rem;
-    }
-    .screenshots-row {
-      display: grid;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .screenshots-row:last-child { margin-bottom: 0; }
-    .screenshots-row-2 { grid-template-columns: 1fr 1fr; }
-    .screenshots-row-3 { grid-template-columns: 1fr 1fr 1fr; }
-    .screenshot {
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .screenshot img {
+    .feature-cell .feature-shot img {
       display: block;
       width: 100%;
-      object-fit: cover;
-      object-position: top center;
-    }
-    .screenshots-row-2 .screenshot img { height: 260px; }
-    .screenshots-row-3 .screenshot img { height: 380px; }
-    .screenshot {
+      border-radius: 12px;
+      border: 1px solid var(--border);
       cursor: zoom-in;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .screenshot figcaption {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-align: center;
-      letter-spacing: 0.04em;
+    .feature-cell .feature-shot img:hover {
+      border-color: rgba(201,120,54,0.4);
+      transform: translateY(-3px);
+    }
+    @media (max-width: 860px) {
+      .feature-row-pair {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .feature-row-pair {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
     }
 
     /* ── Lightbox ── */
@@ -333,11 +329,6 @@
     }
 
     /* ── Community ── */
-    .community-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.25rem;
-    }
     .community-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -348,12 +339,6 @@
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
       display: block;
-    }
-    .community-card h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.5rem;
     }
     .community-card p {
       font-size: 0.875rem;
@@ -391,7 +376,7 @@
       text-align: center;
     }
     .footer-inner {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -435,7 +420,7 @@
 <div class="hero">
   <h1>Your <span>complete toolkit</span><br />for Bible study</h1>
   <p>
-    A Reformed, text-first Bible study app. Every resource — text, commentary, lexicon,
+    A text-first Bible study app. Every resource — text, commentary, lexicon,
     maps, genealogy — is bundled on-device. No internet connection required, ever.
   </p>
   <a class="store-btn" href="https://play.google.com/store/apps/details?id=org.remingtons.evanda.bub" target="_blank" rel="noopener">
@@ -454,97 +439,127 @@
   <div class="section-label">Features</div>
   <h2>Everything in one place</h2>
   <p class="section-intro">
-    Six integrated tools that work together, all bundled locally so they're
+    Integrated study tools that work together, all bundled locally so they're
     available anywhere — in a cabin, on a plane, or anywhere else without internet.
   </p>
 
-  <div class="feature-grid">
-    <div class="feature-card">
-      <span class="feature-icon">📖</span>
-      <h3>Bible Reader</h3>
-      <p>
-        Read in the Berean Standard Bible (default) or King James Version.
-        Tap any word to instantly see its original Hebrew or Greek definition
-        from Strong's lexicon.
-      </p>
+  <div class="feature-showcase">
+    <div class="feature-row-pair">
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">🖍️</span>
+          <h3>Bookmarks &amp; Highlights</h3>
+          <p>
+            Bookmark verses and mark them with multi-color highlights that persist on
+            your device. Large, easy-to-tap highlight colors make marking up a passage quick.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/reader.png">
+          <img src="images/thumbs/reader.png" alt="Bible reader with a highlighted verse" loading="lazy" />
+        </figure>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">📖</span>
+          <h3>Versions, Languages, Interlinear</h3>
+          <p>
+            Read in the Berean Standard Bible (default) or King James Version, with
+            adjustable text size, previous / next chapter navigation, and a bilingual
+            interlinear — tap any word to see the original Greek or Hebrew inline.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/interlinear.png">
+          <img src="images/thumbs/interlinear.png" alt="Interlinear Greek text below each word in John 1" loading="lazy" />
+        </figure>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">🔧</span>
+          <h3>Verse Utility Belt</h3>
+          <p>
+            Select any verse to open a context panel: Strong's definitions, era-filtered
+            commentary from 200+ Church Fathers and Reformers — Augustine, Calvin, Luther,
+            Spurgeon — cross-references, and related classic hymns. Copy or share any verse.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/commentary.png">
+          <img src="images/thumbs/commentary.png" alt="Era-filtered commentary from John Chrysostom in the verse utility belt" loading="lazy" />
+        </figure>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">🔍</span>
+          <h3>Full-Text Search &amp; Cross-References</h3>
+          <p>
+            Search the full text of all of scripture, examine the original Hebrew or
+            Greek with Strong's definitions, and trace ~340,000 cross-references
+            linking related passages across the whole Bible.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/search.png">
+          <img src="images/thumbs/search.png" alt="Full-text search results across scripture" loading="lazy" />
+        </figure>
+      </div>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔧</span>
-      <h3>Utility Belt</h3>
-      <p>
-        Select any verse to open a context panel with era-filtered commentary
-        from 200+ Church Fathers and Reformers — Augustine, Calvin, Luther,
-        Spurgeon, and more — plus related classic hymns.
-      </p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔍</span>
-      <h3>Concordance, Languages &amp; Cross-References</h3>
-      <p>
-        Search the concordance for any word, examine the original Hebrew or
-        Greek with Strong's definitions, and trace ~340,000 cross-references
-        linking related passages across the whole Bible.
-      </p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🗺️</span>
-      <h3>Biblical Atlas</h3>
-      <p>
-        An interactive offline map of the Holy Land with ~700 geocoded biblical
-        places. Tap a place name in the reader to jump straight to it on the map.
-      </p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🌳</span>
-      <h3>Genealogy</h3>
-      <p>
-        Explore the biblical family tree from Adam to Jesus, with ~3,500 named
-        individuals. Tap any person in the text to view their entry, lineage,
-        and biographical notes.
-      </p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">📅</span>
-      <h3>Reading Plans</h3>
-      <p>
-        Date-based reading schedules with checkbox progress tracking saved on
-        your device. Follow a plan at your own pace — your progress is always
-        remembered locally.
-      </p>
+    <div class="feature-row-pair">
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">🗺️</span>
+          <h3>Biblical Atlas</h3>
+          <p>
+            An interactive offline map of the Holy Land with ~700 geocoded biblical
+            places — plus Paul's four missionary journeys as color-coded overlays. Tap a
+            place name in the reader to jump straight to it on the map.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/atlas.png">
+          <img src="images/thumbs/atlas.png" alt="Interactive Holy-Land atlas with biblical places" loading="lazy" />
+        </figure>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">🌳</span>
+          <h3>Genealogy</h3>
+          <p>
+            Explore the biblical family tree from Adam to Jesus, with ~3,500 named
+            individuals — filterable by the line of Jesus, the twelve tribes, or the
+            apostles. Tap a name in the text to see their entry, or "find in text" every
+            verse they appear in.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/genealogy.png">
+          <img src="images/thumbs/genealogy.png" alt="Biblical family tree centered on Noah" loading="lazy" />
+        </figure>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">📅</span>
+          <h3>Reading Plans</h3>
+          <p>
+            Date-based reading schedules with checkbox progress tracking saved on your
+            device. Follow a plan at your own pace — your progress is always remembered locally.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/plans.png">
+          <img src="images/thumbs/plans.png" alt="Reading plan with checkbox progress tracking" loading="lazy" />
+        </figure>
+      </div>
+      <div class="feature-cell">
+        <div class="feature-text">
+          <span class="feature-icon">🔔</span>
+          <h3>Daily Reading Reminder</h3>
+          <p>
+            An optional daily "Read your bible!" notification that takes you straight to
+            your reading-plan chapter — or wherever you last left off.
+          </p>
+        </div>
+        <figure class="screenshot feature-shot" data-full="images/reminder.png">
+          <img src="images/thumbs/reminder.png" alt="Daily 'Read your bible!' reminder notification" loading="lazy" />
+        </figure>
+      </div>
     </div>
   </div>
 </section>
-
-<div class="screenshots-outer">
-  <div class="screenshots-header">
-    <div class="section-label">Screenshots</div>
-    <h2>See it in action</h2>
-  </div>
-  <div class="screenshots-row screenshots-row-2">
-    <figure class="screenshot" data-full="images/reader.png">
-      <img src="images/thumbs/reader.png" alt="Bible Reader" />
-      <figcaption>Bible Reader</figcaption>
-    </figure>
-    <figure class="screenshot" data-full="images/concordance.png">
-      <img src="images/thumbs/concordance.png" alt="Concordance" />
-      <figcaption>Concordance</figcaption>
-    </figure>
-  </div>
-  <div class="screenshots-row screenshots-row-3">
-    <figure class="screenshot" data-full="images/atlas.png">
-      <img src="images/thumbs/atlas.png" alt="Biblical Atlas" />
-      <figcaption>Biblical Atlas</figcaption>
-    </figure>
-    <figure class="screenshot" data-full="images/genealogy.png">
-      <img src="images/thumbs/genealogy.png" alt="Genealogy" />
-      <figcaption>Genealogy</figcaption>
-    </figure>
-    <figure class="screenshot" data-full="images/reading plan.png">
-      <img src="images/thumbs/reading-plan.png" alt="Reading Plans" />
-      <figcaption>Reading Plans</figcaption>
-    </figure>
-  </div>
-</div>
 
 <section id="principles">
   <div class="section-label">Principles</div>
@@ -608,7 +623,7 @@
     <div class="principle">
       <div class="principle-icon">✝</div>
       <div>
-        <h3>Reformed, text-first</h3>
+        <h3>Text-first</h3>
         <p>
           The app is designed for serious engagement with Scripture. The text is always
           central; every other feature is a tool to illuminate it.
@@ -665,35 +680,21 @@
 </section>
 
 <section id="community">
-  <div class="section-label">Community</div>
-  <h2>Testing &amp; feedback</h2>
+  <div class="section-label">Feedback</div>
+  <h2>Bugs &amp; feature requests</h2>
   <p class="section-intro">
-    BUB is in active development. Testers and feedback are welcome.
+    BUB is in active development — bug reports and feature ideas are welcome.
   </p>
 
-  <div class="community-grid">
-    <div class="community-card">
-      <span class="card-icon">🧪</span>
-      <h3>Join the beta</h3>
-      <p>BUB is available as a Google Play beta. To install it you need to join the testers group first, then use the Play Store testing link.</p>
-      <ol>
-        <li>Join the <strong style="color:var(--text)">bub-testers</strong> Google Group</li>
-        <li>Then open the Play Store testing link to install</li>
-      </ol>
-      <a class="card-link" href="https://groups.google.com/g/bub-testers/members" target="_blank" rel="noopener">→ Join bub-testers group</a>
-      <a class="card-link" href="https://play.google.com/apps/testing/org.remingtons.evanda.bub" target="_blank" rel="noopener">→ Install via Play Store (testers)</a>
-    </div>
-    <div class="community-card">
-      <span class="card-icon">🐛</span>
-      <h3>Bugs &amp; feature requests</h3>
-      <p>All feedback goes through GitHub Issues on the <strong style="color:var(--text)">bub-feedback</strong> repo. You'll need a free GitHub account.</p>
-      <ol>
-        <li>Search existing issues — add a 👍 if yours is already there</li>
-        <li>Click <strong style="color:var(--text)">New issue</strong> and write a clear title</li>
-        <li>Describe the problem or idea — screenshots encouraged</li>
-      </ol>
-      <a class="card-link" href="https://github.com/evanda/bub-feedback/issues" target="_blank" rel="noopener">→ Open an issue on GitHub</a>
-    </div>
+  <div class="community-card">
+    <span class="card-icon">🐛</span>
+    <p>All feedback goes through GitHub Issues on the <strong style="color:var(--text)">bub-feedback</strong> repo. You'll need a free GitHub account.</p>
+    <ol>
+      <li>Search existing issues — add a 👍 if yours is already there</li>
+      <li>Click <strong style="color:var(--text)">New issue</strong> and write a clear title</li>
+      <li>Describe the problem or idea — screenshots encouraged</li>
+    </ol>
+    <a class="card-link" href="https://github.com/evanda/bub-feedback/issues" target="_blank" rel="noopener">→ Open an issue on GitHub</a>
   </div>
 </section>
 
@@ -720,8 +721,9 @@
 
   document.querySelectorAll('.screenshot[data-full]').forEach(fig => {
     fig.addEventListener('click', () => {
+      const img = fig.querySelector('img');
       lbImg.src = fig.dataset.full;
-      lbImg.alt = fig.querySelector('figcaption').textContent;
+      lbImg.alt = img ? img.alt : '';
       lb.classList.add('open');
     });
   });
