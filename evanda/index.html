@@ -638,10 +638,10 @@
     }
     .cat-cell.active .cat-label { color: var(--sky-pale); }
 
-    /* portrait: col 2, rows 1–2 */
+    /* portrait: col 2, row 2 (center) */
     .cat-portrait {
       grid-column: 2;
-      grid-row: 1 / 3;
+      grid-row: 2;
       overflow: hidden;
     }
     .cat-portrait img {
@@ -651,6 +651,13 @@
       object-position: 50% 20%;
       display: block;
       filter: brightness(0.88) saturate(0.88);
+    }
+
+    /* tech: col 2, row 1 (top center) — links out instead of expanding a panel */
+    .cat-tech {
+      grid-column: 2;
+      grid-row: 1;
+      display: block;
     }
 
     /* expandable panel */
@@ -696,6 +703,7 @@
 
     @media (max-width: 640px) {
       .cat-portrait { display: none; }
+      .cat-tech { grid-column: auto; grid-row: auto; }
       .cat-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
     }
 
@@ -755,7 +763,16 @@
       </div>
     </div>
 
-    <!-- col 2, rows 1–2: portrait -->
+    <!-- col 2, row 1: tech (links to a dedicated projects page) -->
+    <a class="cat-cell cat-tech" href="tech.html">
+      <img src="images/PXL_20210508_010103578.jpg" alt="Tech &amp; Software Projects" loading="lazy">
+      <div class="cat-overlay">
+        <i class="fa fa-terminal cat-icon"></i>
+        <span class="cat-label">Tech</span>
+      </div>
+    </a>
+
+    <!-- col 2, row 2: portrait -->
     <div class="cat-portrait">
       <img src="images/PXL_20260124_221647825.TS-000.jpg" alt="Evanda Remington">
     </div>
@@ -1086,13 +1103,13 @@
         <div class="sec-eyebrow">By day</div>
         <h2 class="sec-title">Tech &amp; Work</h2>
         <div class="sec-rule"></div>
-        <p class="sec-blurb">Software engineer at Google in Atlanta since 2001 — infrastructure, developer tools, and emerging platforms. Still genuinely interested after all these years.</p>
+        <p class="sec-blurb">Software engineer in Atlanta since 2004 — Perspective Labs, Manhattan Associates, and now Google. Still genuinely interested after all these years.</p>
       </div>
       <div class="cards">
         <div class="card">
           <span class="card-icon"><i class="fa fa-google"></i></span>
           <h4>Google</h4>
-          <p>Two-plus decades building at scale. Developer platforms, infrastructure, and the occasional side-conversation about AI that turned into a whole new career chapter.<br><br>
+          <p>At Google since 2020, after Manhattan Associates (2007–2020) and Perspective Labs (2004–2007). Developer platforms, infrastructure, and lately, a deep dive into agentic AI.<br><br>
           <a href="https://www.linkedin.com/in/evanda/" target="_blank">LinkedIn ↗</a></p>
         </div>
         <div class="card">
@@ -1106,9 +1123,9 @@
           <img src="images/20180223_134115.jpg" alt="Speaking at DevNexus conference">
           <div class="gcap"><span>DevNexus 2018 — developer platforms</span></div>
         </div>
-        <div class="gitem" data-src="images/PXL_20210508_010103578.jpg" data-cap="Google Atlanta — since 2001">
+        <div class="gitem" data-src="images/PXL_20210508_010103578.jpg" data-cap="Google Atlanta shirt — the office opened in 2001, I joined in 2020">
           <img src="images/PXL_20210508_010103578.jpg" alt="Wearing a Google Atlanta shirt">
-          <div class="gcap"><span>Google Atlanta — since 2001</span></div>
+          <div class="gcap"><span>Google Atlanta shirt — the office opened in 2001, I joined in 2020</span></div>
         </div>
       </div>
     </div>
@@ -1125,6 +1142,7 @@
   <div class="footer-name">Evanda Remington</div>
   <div class="footer-links">
     <a href="../index.html"><i class="fa fa-home"></i>&nbsp;Remingtons.org</a>
+    <a href="tech.html"><i class="fa fa-terminal"></i>&nbsp;Tech &amp; Projects</a>
     <a href="https://www.linkedin.com/in/evanda/" target="_blank"><i class="fa fa-linkedin"></i>&nbsp;LinkedIn</a>
     <a href="https://www.instagram.com/evandaremington/" target="_blank"><i class="fa fa-instagram"></i>&nbsp;Instagram</a>
     <a href="https://midwaypca.org" target="_blank"><i class="fa fa-university"></i>&nbsp;Midway PCA</a>
@@ -1180,7 +1198,7 @@
     }, 80);
   }
 
-  document.querySelectorAll('.cat-cell').forEach(cell => {
+  document.querySelectorAll('.cat-cell:not(.cat-tech)').forEach(cell => {
     cell.addEventListener('click', () => openCat(cell.dataset.cat));
   });
 
