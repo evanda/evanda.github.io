@@ -141,6 +141,61 @@
       line-height: 1;
     }
 
+    /* ── Desktop download ── */
+    .desktop-dl {
+      margin: 0 auto 2rem;
+      max-width: 640px;
+    }
+    .desktop-dl-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin-bottom: 0.85rem;
+    }
+    .desktop-dl-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-align: left;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.7rem 1.1rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      min-width: 210px;
+    }
+    .dl-btn:hover {
+      border-color: rgba(201,120,54,0.5);
+      background: #1d222f;
+    }
+    .dl-btn-icon { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .dl-btn-title {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .dl-btn-sub {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .desktop-dl-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.85rem;
+      line-height: 1.5;
+    }
+
     /* ── Section ── */
     section {
       padding: 4rem 2rem;
@@ -441,6 +496,29 @@
   <a class="store-btn" href="https://play.google.com/store/apps/details?id=org.remingtons.evanda.bub" target="_blank" rel="noopener">
     <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" />
   </a>
+  <div class="desktop-dl">
+    <div class="desktop-dl-label">Also on Windows desktop</div>
+    <div class="desktop-dl-btns">
+      <a class="dl-btn" href="https://github.com/evanda/bub-feedback/releases/download/desktop-v1.2.2/BUB-Setup-1.2.2-x64.exe">
+        <span class="dl-btn-icon">🪟</span>
+        <span class="dl-btn-text">
+          <span class="dl-btn-title">Windows Installer</span>
+          <span class="dl-btn-sub">.exe · 154&nbsp;MB · Start Menu shortcut</span>
+        </span>
+      </a>
+      <a class="dl-btn" href="https://github.com/evanda/bub-feedback/releases/download/desktop-v1.2.2/BUB-1.2.2-x64.exe">
+        <span class="dl-btn-icon">🪟</span>
+        <span class="dl-btn-text">
+          <span class="dl-btn-title">Windows Portable</span>
+          <span class="dl-btn-sub">.exe · 153&nbsp;MB · no install</span>
+        </span>
+      </a>
+    </div>
+    <div class="desktop-dl-note">
+      Unsigned build — if Windows SmartScreen appears on first launch, click
+      <strong style="color:var(--text)">More info → Run anyway</strong>.
+    </div>
+  </div>
   <div class="pill-row">
     <span class="pill"><span class="pill-icon">🚫</span>No fees</span>
     <span class="pill"><span class="pill-icon">🚫</span>No ads</span>
