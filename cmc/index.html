@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Church Maintenance Coordinator (CMC)</title>
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 3px solid #3498db;
+}
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+header p {
+  font-size: 1.2em;
+  color: #ecf0f1;
+  margin: 0;
+}
+.subtitle {
+  font-size: 0.9em;
+  color: #bdc3c7;
+  margin-top: 15px;
+}
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.intro {
+  font-size: 1.05em;
+  color: #444;
+  margin: 30px 0 50px;
+}
+section {
+  margin-bottom: 56px;
+}
+.section-title {
+  font-size: 1.7em;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title i {
+  color: #3498db;
+  font-size: 0.85em;
+}
+.section-intro {
+  color: #475569;
+  margin: 16px 0;
+  max-width: 720px;
+}
+.shot {
+  display: block;
+  margin: 22px 0;
+}
+.shot figure {
+  margin: 0;
+  display: inline-block;
+  max-width: 100%;
+}
+.shot img {
+  display: block;
+  max-width: 560px;
+  width: 100%;
+  height: auto;
+  border: 1px solid #dbe2ea;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: zoom-in;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.shot img:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+  transform: translateY(-2px);
+}
+.shot figcaption {
+  font-size: 0.82em;
+  color: #8492a6;
+  margin-top: 8px;
+  font-family: 'Monaco', 'Courier New', monospace;
+}
+.shot.small img {
+  max-width: 400px;
+}
+.two-up {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.two-up .shot {
+  flex: 1 1 260px;
+}
+.two-up .shot img {
+  max-width: 100%;
+}
+footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+footer a {
+  color: #3498db;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+.lightbox.open {
+  display: flex;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 88vh;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.85;
+  background: none;
+  border: none;
+}
+.lightbox-close:hover {
+  opacity: 1;
+}
+.lightbox-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #cbd5e1;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.85em;
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  font-size: 1.8em;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.lightbox-nav:hover {
+  background: rgba(255,255,255,0.22);
+}
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+
+.hero-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1.7fr 1fr;
+  grid-template-rows: 220px 220px;
+  grid-template-areas:
+    "lt center rt"
+    "lb center rb";
+  gap: 14px;
+  margin: 34px 0 54px;
+}
+.hero-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+  cursor: pointer;
+}
+.hero-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.hero-cell:hover img {
+  transform: scale(1.05);
+}
+.hero-left-top { grid-area: lt; }
+.hero-left-bottom { grid-area: lb; }
+.hero-center { grid-area: center; }
+.hero-right-top { grid-area: rt; }
+.hero-right-bottom { grid-area: rb; }
+.hero-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(15,23,42,0.85), transparent);
+  color: #fff;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 24px 14px 10px;
+  pointer-events: none;
+}
+.hero-center .hero-label {
+  font-size: 1.1em;
+  padding: 36px 20px 18px;
+}
+.shot.flash-highlight figure img {
+  animation: flash-pulse 1.4s ease;
+}
+@keyframes flash-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(52,152,219,0.7); }
+  30% { box-shadow: 0 0 0 8px rgba(52,152,219,0.35); }
+  100% { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+}
+
+@media (max-width: 768px) {
+  header h1 { font-size: 1.8em; }
+  .section-title { font-size: 1.3em; }
+  .lightbox-nav { width: 42px; height: 42px; font-size: 1.4em; }
+  .hero-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: 260px 180px 180px 180px 180px;
+    grid-template-areas:
+      "center"
+      "lt"
+      "lb"
+      "rt"
+      "rb";
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Church Maintenance Coordinator</h1>
+  <p>CMC Application Suite</p>
+  <p class="subtitle">Campus facilities management, work order tracking, and preventive maintenance coordination for churches and ministries</p>
+</header>
+
+<div class="container">
+
+<p class="intro">
+  The Church Maintenance Coordinator (CMC) is a facilities management system for churches and ministries. It tracks maintenance work, assets, vendors, and preventive maintenance across a multi-building campus. Below is a tour of the application, section by section, using screenshots from an example deployment — click any screenshot to view it full size.
+</p>
+
+<div class="hero-gallery">
+  <div class="hero-cell hero-left-top" data-scroll-target="#feature-dashboard">
+    <img class="hero-img" src="images/screenshot-01.jpg" alt="Dashboard Overview">
+    <span class="hero-label">Dashboard</span>
+  </div>
+  <div class="hero-cell hero-left-bottom" data-scroll-target="#feature-work-orders">
+    <img class="hero-img" src="images/screenshot-07.jpg" alt="Work Orders Kanban Board">
+    <span class="hero-label">Work Orders</span>
+  </div>
+  <div class="hero-cell hero-center" data-scroll-target="#feature-campus-map">
+    <img class="hero-img" src="images/screenshot-03-map-crop.jpg" alt="Campus Map View">
+    <span class="hero-label">Campus Map</span>
+  </div>
+  <div class="hero-cell hero-right-top" data-scroll-target="#feature-asset-details">
+    <img class="hero-img" src="images/screenshot-12.jpg" alt="Asset Detail Page">
+    <span class="hero-label">Asset Details</span>
+  </div>
+  <div class="hero-cell hero-right-bottom" data-scroll-target="#feature-maintenance-schedules">
+    <img class="hero-img" src="images/screenshot-13.jpg" alt="Maintenance Schedules">
+    <span class="hero-label">Maintenance Schedules</span>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<section>
+  <h2 class="section-title"><i class="fa fa-dashboard"></i> Dashboard</h2>
+  <p class="section-intro">
+    The dashboard is the landing page and gives a real-time snapshot of the whole campus: six KPI cards covering active work orders, assets, buildings, floors, and locations, plus a Preventive Maintenance panel that flags overdue, due-soon, and on-track schedules at a glance.
+  </p>
+  <div class="shot" id="feature-dashboard">
+    <figure>
+      <img src="images/screenshot-01.jpg" alt="Dashboard Overview" data-caption="Dashboard Overview — /">
+      <figcaption>/ — Dashboard Overview</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Scrolling down surfaces the Contracts &amp; Warranties panel, which tracks registrations, insurance policies, and other renewal-dated items before they lapse.
+  </p>
+  <div class="shot small">
+    <figure>
+      <img src="images/screenshot-02.jpg" alt="Contracts and Warranties Dashboard" data-caption="Dashboard — Contracts & Warranties">
+      <figcaption>/ (scrolled) — Contracts &amp; Warranties</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Campus -->
+<section>
+  <h2 class="section-title"><i class="fa fa-building"></i> Campus Management</h2>
+  <p class="section-intro">
+    The Campus section organizes the physical property. An interactive map plots building footprints and color-coded asset markers over an aerial view — click a marker to jump straight to that asset, or click a building to see its open work orders.
+  </p>
+  <div class="shot" id="feature-campus-map">
+    <figure>
+      <img src="images/screenshot-03.jpg" alt="Campus Map View" data-caption="Campus — Map">
+      <figcaption>/campus — Map</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Underneath the map, campus structure is broken into Buildings, Floors, and Locations. All 6 buildings are catalogued with the spaces they contain — the 1987 Building (School) houses the kitchen/cafeteria, library, and computer lab, while the 2009 Building (Church) contains the sanctuary, narthex, and nurseries. Floors span from basement level (-1) up to level 2, and named sub-areas like the Organ Enclosure can be tracked as Locations for granular maintenance targeting.
+  </p>
+  <div class="two-up">
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-04.jpg" alt="Buildings List" data-caption="Campus — Buildings">
+        <figcaption>/campus › Buildings</figcaption>
+      </figure>
+    </div>
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-05.jpg" alt="Floors List" data-caption="Campus — Floors">
+        <figcaption>/campus › Floors</figcaption>
+      </figure>
+    </div>
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-06.jpg" alt="Locations List" data-caption="Campus — Locations">
+        <figcaption>/campus › Locations</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Work Orders -->
+<section>
+  <h2 class="section-title"><i class="fa fa-tasks"></i> Work Orders</h2>
+  <p class="section-intro">
+    Work orders are the heart of day-to-day maintenance coordination, and CMC offers three views onto the same data. The Board view is a Kanban layout with Open, In Progress, On Hold, and Completed columns, so status changes are just a drag away.
+  </p>
+  <div class="shot" id="feature-work-orders">
+    <figure>
+      <img src="images/screenshot-07.jpg" alt="Work Orders Kanban Board" data-caption="Work Orders — Board View">
+      <figcaption>/work-orders — Board View</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    The List view lays the same work orders out as a sortable table — status, priority, assignee, and due/done dates all in one row, with color-coded status dots for quick scanning.
+  </p>
+  <div class="shot">
+    <figure>
+      <img src="images/screenshot-08.jpg" alt="Work Orders List View" data-caption="Work Orders — List View">
+      <figcaption>/work-orders › List</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    And the Calendar view plots work orders on their due dates across the month, useful for spotting scheduling conflicts before they happen.
+  </p>
+  <div class="shot small">
+    <figure>
+      <img src="images/screenshot-09.jpg" alt="Work Orders Calendar View" data-caption="Work Orders — Calendar View">
+      <figcaption>/work-orders › Calendar</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Clicking into any work order opens a detail modal for logging labor hours, parts and vendor costs, completion notes, and before/after photos.
+  </p>
+  <div class="shot small">
+    <figure>
+      <img src="images/screenshot-10.jpg" alt="Work Order Details" data-caption="Work Order Detail Modal">
+      <figcaption>/work-orders?wo={id}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Assets -->
+<section>
+  <h2 class="section-title"><i class="fa fa-cogs"></i> Asset Management</h2>
+  <p class="section-intro">
+    Every piece of equipment worth tracking — HVAC units, vehicles, generators, and more — lives in the Asset list, 55 items strong, each carrying a category, location, criticality rating, and active/retired status.
+  </p>
+  <div class="shot">
+    <figure>
+      <img src="images/screenshot-11.jpg" alt="Asset List" data-caption="Assets — Asset List">
+      <figcaption>/assets</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Each asset has its own detail page with make/model, serial number, map coordinates, a maintenance point of contact, and a full work history.
+  </p>
+  <div class="shot" id="feature-asset-details">
+    <figure>
+      <img src="images/screenshot-12.jpg" alt="Asset Detail Page" data-caption="Asset Detail Page">
+      <figcaption>/assets/{id}</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Recurring upkeep is handled by Maintenance Schedules, which trigger on a time interval (e.g. "every 3 months") and automatically generate work orders as they come due — including schedules flagged for compliance.
+  </p>
+  <div class="shot" id="feature-maintenance-schedules">
+    <figure>
+      <img src="images/screenshot-13.jpg" alt="Maintenance Schedules" data-caption="Assets — Maintenance Schedules">
+      <figcaption>/assets › Maintenance Schedules</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Fleet vehicles get their own tab tracking VIN, plate, and the three dates that matter most: registration, insurance, and inspection expiry.
+  </p>
+  <div class="shot small">
+    <figure>
+      <img src="images/screenshot-14.jpg" alt="Fleet Renewal Tracking" data-caption="Assets — Fleet">
+      <figcaption>/assets › Fleet</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Vendors & Reports -->
+<section>
+  <h2 class="section-title"><i class="fa fa-users"></i> Vendors &amp; Reporting</h2>
+  <p class="section-intro">
+    The Vendors &amp; Contacts page keeps outside contractors organized — rate, Certificate of Insurance (COI) expiry with a days-remaining countdown, and contract expiration, all in one table.
+  </p>
+  <div class="shot">
+    <figure>
+      <img src="images/screenshot-15.jpg" alt="Vendors and Contacts" data-caption="Vendors — Vendor List">
+      <figcaption>/vendors</figcaption>
+    </figure>
+  </div>
+  <p class="section-intro">
+    Reports round things out with spend &amp; forecast trends, preventive-maintenance compliance analytics, and an Expiry Board that consolidates every warranty, COI, contract, and vehicle renewal date approaching within 60 days into one prioritized list.
+  </p>
+  <div class="two-up">
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-16.jpg" alt="Spend and Forecast Report" data-caption="Reports — Spend & Forecast">
+        <figcaption>/reports › Spend</figcaption>
+      </figure>
+    </div>
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-17.jpg" alt="Preventive Maintenance Report" data-caption="Reports — Preventive Maintenance">
+        <figcaption>/reports › Preventive Maintenance</figcaption>
+      </figure>
+    </div>
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-18.jpg" alt="Expiry Board Top" data-caption="Reports — Expiry Board (top)">
+        <figcaption>/reports › Expiries</figcaption>
+      </figure>
+    </div>
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-19.jpg" alt="Expiry Board Vehicle Section" data-caption="Reports — Expiry Board (vehicles)">
+        <figcaption>/reports › Expiries (continued)</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Settings -->
+<section>
+  <h2 class="section-title"><i class="fa fa-cog"></i> Configuration &amp; Settings</h2>
+  <p class="section-intro">
+    General Settings controls org-wide basics — facility name, logo, address, maintenance contact email, brand colors, and locale/timezone defaults that apply to every user immediately.
+  </p>
+  <div class="two-up">
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-20.jpg" alt="General Settings" data-caption="Settings — General Settings">
+        <figcaption>/settings</figcaption>
+      </figure>
+    </div>
+    <div class="shot">
+      <figure>
+        <img src="images/screenshot-21.jpg" alt="General Settings Continued" data-caption="Settings — General Settings (lower)">
+        <figcaption>/settings (continued)</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="section-intro">
+    User Management lists everyone with access and their role — admin, technician, trustee, or requester — with inline role changes and account deactivation, all governed by role-based permissions.
+  </p>
+  <div class="shot">
+    <figure>
+      <img src="images/screenshot-22.jpg" alt="User Management" data-caption="Settings — Users">
+      <figcaption>/settings › Users</figcaption>
+    </figure>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p><strong>Church Maintenance Coordinator (CMC)</strong> — Facilities Management System</p>
+  <p>Documented July 2, 2026</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+(function() {
+  var thumbs = Array.prototype.slice.call(document.querySelectorAll('.shot img'));
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  var lbCaption = document.getElementById('lightboxCaption');
+  var current = 0;
+
+  function open(index) {
+    current = index;
+    var img = thumbs[current];
+    lbImg.src = img.src;
+    lbCaption.textContent = img.getAttribute('data-caption') || '';
+    lightbox.classList.add('open');
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    lbImg.src = '';
+  }
+
+  function next() {
+    open((current + 1) % thumbs.length);
+  }
+
+  function prev() {
+    open((current - 1 + thumbs.length) % thumbs.length);
+  }
+
+  thumbs.forEach(function(img, i) {
+    img.addEventListener('click', function() { open(i); });
+  });
+
+  document.getElementById('lightboxClose').addEventListener('click', close);
+  document.getElementById('lightboxNext').addEventListener('click', next);
+  document.getElementById('lightboxPrev').addEventListener('click', prev);
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) close();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('.hero-cell')).forEach(function(cell) {
+    cell.addEventListener('click', function() {
+      var target = document.querySelector(cell.getAttribute('data-scroll-target'));
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('flash-highlight');
+      setTimeout(function() { target.classList.remove('flash-highlight'); }, 1400);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
